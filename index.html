@@ -255,13 +255,33 @@ section{padding:clamp(4rem,9vw,7rem) 0;scroll-margin-top:64px}
 .proj .idx{font-family:var(--mono);font-size:var(--t-sm);color:var(--fg3);padding-top:.2rem;letter-spacing:.05em}
 .proj-top{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.45rem}
 .proj-top h3{font-size:1.1rem;color:var(--fg)}
-.proj p{font-size:var(--t-md);color:var(--fg2);max-width:70ch;margin-bottom:.85rem;line-height:1.65}
+".proj p{font-size:var(--t-md);color:var(--fg2);max-width:70ch;margin-bottom:.85rem;line-height:1.65}
+.plinks{display:flex;gap:1.1rem;font-family:var(--mono);font-size:var(--t-sm);margin:.2rem 0 .85rem;flex-wrap:wrap}
+.plinks a{display:inline-flex;align-items:center;gap:.3rem;transition:.22s}
+.plinks a .ar{transition:transform .25s var(--ez)}
+.plinks a:hover .ar{transform:translate(3px,-3px)}
+.plinks a.src{color:var(--fg3)}
+.plinks a.src:hover{color:var(--ac)}
 @media(max-width:600px){.proj{grid-template-columns:1fr;gap:.5rem}.proj:hover{background:none}}
 .badge-s{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.09em;
   padding:.2rem .5rem;border-radius:5px;white-space:nowrap;font-weight:500}
 .badge-s.live{color:var(--ac);background:var(--ac-w);border:1px solid var(--ac-b)}
 .badge-s.wip{color:var(--am);background:var(--am-w);border:1px solid var(--am-b)}
 .badge-s.plan{color:var(--fg3);background:var(--s2);border:1px solid var(--bd)}
+
+/* ══════════ EXPERIENCE ══════════ */
+.exp{display:flex;flex-direction:column}
+.xp{display:grid;grid-template-columns:186px minmax(0,1fr);gap:var(--sp-4);
+  padding:1.5rem 0;border-top:1px solid var(--bd);transition:.3s}
+.xp:last-child{border-bottom:1px solid var(--bd)}
+.xp:hover{background:linear-gradient(90deg,var(--ac-w),transparent 55%)}
+.xp .when{font-family:var(--mono);font-size:var(--t-sm);color:var(--fg2);padding-top:.2rem}
+.xp .when i{display:block;font-style:normal;font-size:var(--t-xs);color:var(--fg3);
+  text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem}
+.xp h3{font-size:1.02rem}
+.xp .org{font-family:var(--mono);font-size:var(--t-sm);color:var(--ac);margin-top:.25rem;display:block}
+.xp p{font-size:var(--t-md);color:var(--fg2);margin:.6rem 0 0;max-width:68ch;line-height:1.65}
+@media(max-width:660px){.xp{grid-template-columns:1fr;gap:.4rem}.xp:hover{background:none}}
 
 /* ══════════ STACK ══════════ */
 .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-4)}
@@ -343,6 +363,7 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
       <a href="#about" data-sc>whoami</a>
       <a href="#focus" data-sc>focus</a>
       <a href="#work" data-sc>work</a>
+      <a href="#experience" data-sc>experience</a>
       <a href="#stack" data-sc>stack</a>
       <a href="#connect" data-sc>connect</a>
       <a href="#contact" class="keep" data-sc>contact</a>
@@ -462,30 +483,113 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
 <!-- ═══ WORK ═══ -->
 <section id="work" class="wrap rev">
   <div class="shead"><h2 data-sc>work</h2><span class="rule"></span><span class="n">03</span></div>
-  <p class="sub" data-i="wsub">Status is labelled honestly. Nothing is marked shipped until it is.</p>
+  <p class="sub" data-i="wsub">Status is labelled honestly. Everything marked live is online and working right now.</p>
   <div class="projects">
+
     <article class="proj">
       <span class="idx">01</span>
       <div>
-        <div class="proj-top"><h3 data-i="w1t">Network Recon Toolkit</h3><span class="badge-s wip" data-i="stBuild">building</span></div>
-        <p data-i="w1d">A Python CLI that scans a subnet, identifies live hosts and open services, and writes an inventory you can diff. It tells you when something new appears on a network.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">Scapy</span><span class="tag">asyncio</span></div>
+        <div class="proj-top"><h3>Network Design Console</h3><span class="badge-s live" data-i="stLive">live</span></div>
+        <p data-i="w1d">An offline-first study console for Computer Network Design and Management,
+          built as one HTML file with no dependencies. Covers VLANs, trunking, EtherChannel and
+          inter-VLAN routing, and includes a working 802.1D spanning-tree solver that computes root
+          bridge, port roles and blocked ports from a topology you enter.</p>
+        <div class="plinks">
+          <a href="https://zann208.github.io/netdes/" target="_blank" rel="noopener" data-i="lnLive">Open console <span class="ar">↗</span></a>
+          <a class="src" href="https://github.com/Zann208/netdes" target="_blank" rel="noopener" data-i="lnSrc">Source <span class="ar">↗</span></a>
+        </div>
+        <div class="tags"><span class="tag">Vanilla JS</span><span class="tag">STP / RSTP</span><span class="tag">Offline-first</span><span class="tag">Single file</span></div>
       </div>
     </article>
+
     <article class="proj">
       <span class="idx">02</span>
       <div>
-        <div class="proj-top"><h3 data-i="w2t">CTF Writeups</h3><span class="badge-s plan" data-i="stPlan">planned</span></div>
-        <p data-i="w2d">Walkthroughs of TryHackMe and HackTheBox rooms. The reasoning, the dead ends, and what finally worked.</p>
-        <div class="tags"><span class="tag">TryHackMe</span><span class="tag">Enumeration</span><span class="tag">Writeups</span></div>
+        <div class="proj-top"><h3>Study Console Suite</h3><span class="badge-s live" data-i="stLive2">live</span></div>
+        <p data-i="w2d">Three more consoles built on the same idea: wireless networks with RF planning
+          and channel reuse, algorithms and data structures with C++ practice, and privacy technologies
+          with entropy-based risk quantification. Each one is a single file that works with no network
+          connection, which is the whole point of them.</p>
+        <div class="plinks">
+          <a href="https://zann208.github.io/study/" target="_blank" rel="noopener" data-i="lnAll">All consoles <span class="ar">↗</span></a>
+          <a class="src" href="https://github.com/Zann208?tab=repositories" target="_blank" rel="noopener" data-i="lnSrc2">Source <span class="ar">↗</span></a>
+        </div>
+        <div class="tags"><span class="tag">RF planning</span><span class="tag">Data structures</span><span class="tag">C++</span><span class="tag">Entropy</span></div>
       </div>
     </article>
+
+    <article class="proj">
+      <span class="idx">03</span>
+      <div>
+        <div class="proj-top"><h3>Pavovival</h3><span class="badge-s live" data-i="stTeam">team project</span></div>
+        <p data-i="w3d">A 2D side-scrolling survival shooter written in Java with libGDX, built with
+          GroupSix as the final project for Object-Oriented Programming. My first substantial codebase
+          written to someone else's architecture rather than my own.</p>
+        <div class="plinks">
+          <a class="src" href="https://github.com/Zann208/pavovival" target="_blank" rel="noopener" data-i="lnSrc3">Source <span class="ar">↗</span></a>
+        </div>
+        <div class="tags"><span class="tag">Java</span><span class="tag">libGDX</span><span class="tag">Gradle</span><span class="tag">OOP</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience" class="wrap rev">
+  <div class="shead"><h2 data-sc>experience</h2><span class="rule"></span><span class="n">04</span></div>
+  <div class="exp">
+
+    <article class="xp">
+      <div class="when">Apr 2025 <span data-i="xTo">to</span> <span data-i="xNow">present</span><i data-i="xPart">part-time</i></div>
+      <div>
+        <h3>Software Assurance &amp; UX Tester</h3>
+        <span class="org">Ongkanon AI · Germany</span>
+        <p data-i="x1d">Testing software and writing up user-experience findings, flagging issues to
+          the teams that own them and working with those teams through to a fix.</p>
+      </div>
+    </article>
+
+    <article class="xp">
+      <div class="when">2024 <span data-i="xTo2">to</span> <span data-i="xNow2">present</span><i data-i="xFound">founder</i></div>
+      <div>
+        <h3>The Zan.log &amp; ZannBot</h3>
+        <span class="org" data-i="x2o">Independent</span>
+        <p data-i="x2d">A personal brand publishing technology content and education material, and
+          ZannBot, a bot built to support it.</p>
+      </div>
+    </article>
+
+    <article class="xp">
+      <div class="when">Jun 2023 <span data-i="xTo3">to</span> May 2026<i data-i="xFree">freelance</i></div>
+      <div>
+        <h3>Tech Analyst</h3>
+        <span class="org">HomePen Studio · Myanmar</span>
+      </div>
+    </article>
+
+    <article class="xp">
+      <div class="when">Jan 2023 <span data-i="xTo4">to</span> Apr 2025<i data-i="xFull">full-time</i></div>
+      <div>
+        <h3>IT Help Desk Technician</h3>
+        <span class="org">WINOSHE Safety Academy · Myanmar</span>
+      </div>
+    </article>
+
+    <article class="xp">
+      <div class="when">2020 <span data-i="xTo5">to</span> 2022<i data-i="xPart2">part-time</i></div>
+      <div>
+        <h3>Training Assistant</h3>
+        <span class="org">WINOSHE Safety Academy · Myanmar</span>
+      </div>
+    </article>
+
   </div>
 </section>
 
 <!-- ═══ STACK ═══ -->
 <section id="stack" class="wrap rev">
-  <div class="shead"><h2 data-sc>stack</h2><span class="rule"></span><span class="n">04</span></div>
+  <div class="shead"><h2 data-sc>stack</h2><span class="rule"></span><span class="n">05</span></div>
   <p class="sub" data-i="ssub">What I work with, grouped by where it sits.</p>
   <div class="stack">
     <div class="st">
@@ -513,7 +617,7 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
 
 <!-- ═══ CERTIFICATIONS ═══ -->
 <section id="certs" class="wrap rev">
-  <div class="shead"><h2 data-sc>certifications</h2><span class="rule"></span><span class="n">05</span></div>
+  <div class="shead"><h2 data-sc>certifications</h2><span class="rule"></span><span class="n">06</span></div>
   <div class="certs">
     <div class="cert prog"><span class="mk">[~]</span>
       <div><h4>Cisco CCNA</h4><span data-i="cProg">in progress</span></div></div>
@@ -528,7 +632,7 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
 
 <!-- ═══ CONNECT ═══ -->
 <section id="connect" class="wrap rev">
-  <div class="shead"><h2 data-sc>connect</h2><span class="rule"></span><span class="n">06</span></div>
+  <div class="shead"><h2 data-sc>connect</h2><span class="rule"></span><span class="n">07</span></div>
   <div class="links">
     <a class="lnk" href="https://www.linkedin.com/in/thu-htoo-zan-8866ab377/" target="_blank" rel="noopener">
       <span class="lnk-top">
@@ -634,7 +738,7 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
 
 
   /* ── i18n: EN / TH / CN ─────────────────────────── */
-  var I18N = { th: {pill:"เปิดรับการฝึกงาน · 2027",lede:"ผมทำงานกับชั้นเครือข่าย ทั้งการจัดเส้นทาง การแบ่งเครือข่ายย่อย และกฎไฟร์วอลล์ที่กำหนดว่าอุปกรณ์ใดสื่อสารกับอุปกรณ์ใดได้บ้าง ปัจจุบันเป็นนักศึกษาชั้นปีที่ 3 สาขาวิศวกรรมระบบสารสนเทศและเครือข่าย มหาวิทยาลัยเชียงใหม่",cta1:"ดูผลงาน",cta2:"ติดต่อผม",n1:"กำลังเรียน",n2:"ความสนใจ",n2v:"เครือข่ายและความปลอดภัย",n3:"จบการศึกษา",cred:"บัตรประจำตัว",b1:"ชื่อ",b2:"หลักสูตร",b3:"ความสนใจ",b4:"เวลาท้องถิ่น",b5:"สถานะ",avail:"● ว่างรับงาน",ns:"เครือข่ายและความปลอดภัย",verif:"✓ ยืนยันแล้ว",a1:"หลักสูตรของผมสอนเป็นภาษาอังกฤษ ครอบคลุมโครงสร้างพื้นฐานเครือข่าย การออกแบบระบบ และความปลอดภัยของข้อมูล ผมเลือกเรียนสาขานี้เพราะอยากเข้าใจว่าข้อมูลเดินทางอย่างไร ไม่ใช่แค่ใช้เครื่องมือเป็น",a2:"การอ่านเรื่องโปรโตคอลอย่างเดียวไปได้ไม่ไกล ผมเรียนรู้จากการลงมือติดตั้ง ทำให้มันพัง แล้วหาสาเหตุว่าทำไมถึงพัง และจดบันทึกสิ่งที่เจอไว้ระหว่างทาง",f1:"การศึกษา",f1v:"กำลังศึกษาวิศวกรรมระบบสารสนเทศและเครือข่าย<br>มหาวิทยาลัยเชียงใหม่",f2:"คณะ",f2v:"คณะวิศวกรรมศาสตร์",f3:"จบการศึกษา",f4:"ที่อยู่",f4v:"เชียงใหม่ ประเทศไทย",seek:"กำลังหา · ฝึกงานด้านเครือข่ายและความปลอดภัย",fsub:"สามด้านที่ส่งเสริมกัน",p1t:"เครือข่าย",p1d:"ออกแบบและแก้ปัญหาเครือข่ายให้ทำงานได้ต่อเนื่อง ทั้งการจัดเส้นทาง สวิตชิ่ง การแบ่งซับเน็ต และการแบ่งเซกเมนต์ โดยเข้าใจตั้งแต่ระดับแพ็กเก็ตขึ้นมา",p2t:"ความปลอดภัย",p2d:"นโยบายไฟร์วอลล์ การควบคุมสิทธิ์การเข้าถึง และการวิเคราะห์ทราฟฟิก การรู้ว่าเครือข่ายพังได้อย่างไร คือส่วนหนึ่งของการรู้วิธีสร้างมัน",p3t:"ระบบและระบบอัตโนมัติ",p3d:"การดูแลระบบลินุกซ์และการเขียนสคริปต์ การตั้งค่าที่ทำซ้ำไม่ได้ ก็ไม่ถือว่าเป็นการตั้งค่าที่แท้จริง",wsub:"ระบุสถานะตามความจริง จะไม่เขียนว่าเสร็จแล้วจนกว่าจะเสร็จจริง",w1t:"ชุดเครื่องมือสำรวจเครือข่าย",w1d:"โปรแกรมบรรทัดคำสั่งภาษา Python ที่สแกนซับเน็ต ระบุโฮสต์ที่ทำงานอยู่และบริการที่เปิด แล้วเขียนรายการที่นำไปเปรียบเทียบได้ ทำให้รู้ทันทีเมื่อมีอุปกรณ์ใหม่เข้ามาในเครือข่าย",w2t:"บันทึกการแก้โจทย์ CTF",w2d:"แนวทางการแก้โจทย์จาก TryHackMe และ HackTheBox ทั้งวิธีคิด ทางตัน และสิ่งที่ได้ผลในที่สุด",stBuild:"กำลังทำ",stPlan:"วางแผนไว้",ssub:"สิ่งที่ผมใช้งาน จัดกลุ่มตามหน้าที่",s1:"เครือข่าย",s2:"ความปลอดภัย",s3:"ระบบ",s4:"การเขียนโปรแกรม",snote:"ความชำนาญแต่ละอย่างไม่เท่ากัน บางอย่างใช้ประจำ บางอย่างยังเรียนรู้อยู่ ยินดีบอกตามตรงว่าอันไหนเป็นอันไหน",cProg:"กำลังเรียน",cAcad:"Cisco Networking Academy",cPlan:"วางแผนไว้",l1:"ประวัติฉบับเต็ม ทั้งการศึกษา ประสบการณ์ และช่องทางติดต่อ",l2:"ซอร์สโค้ดของเครื่องมือที่ผมสร้าง",l3:"บันทึกการทำงาน สิ่งที่กำลังทำ สิ่งที่พัง และสิ่งที่แก้ได้",l1s:"ช่องทางหลัก",l2s:"จะมีโค้ดเร็ว ๆ นี้",l3s:"เริ่มเร็ว ๆ นี้",ct:"คุยกันได้ครับ",cd:"เปิดรับการฝึกงานและตำแหน่งระดับเริ่มต้นด้านวิศวกรรมเครือข่ายและความปลอดภัย อยู่ที่เชียงใหม่ และทำงานทางไกลได้",copy:"คัดลอกอีเมล"}, zh: {pill:"接受实习机会 · 2027",lede:"我专注于网络层：路由、网段划分，以及决定哪些设备可以互相通信的防火墙策略。目前是清迈大学信息系统与网络工程专业三年级学生。",cta1:"查看项目",cta2:"联系我",n1:"在学",n2:"方向",n2v:"网络与安全",n3:"毕业年份",cred:"身份凭证",b1:"姓名",b2:"专业",b3:"方向",b4:"当地时间",b5:"状态",avail:"● 可接洽",ns:"网络与安全",verif:"✓ 已验证",a1:"我的专业以英语授课，涵盖网络基础设施、系统设计与信息安全。我选择这个方向，是想弄清楚流量究竟是如何流动的，而不只是学会操作工具。",a2:"只读协议文档走不了多远。我习惯亲手搭建、把它弄坏，再弄明白为什么会坏，并把过程记录下来。",f1:"学历",f1v:"就读信息系统与网络工程<br>清迈大学",f2:"学院",f2v:"工程学院",f3:"毕业",f4:"所在地",f4v:"泰国清迈",seek:"求职方向 · 网络与安全实习",fsub:"三个互相支撑的方向。",p1t:"网络",p1d:"设计并排查能持续稳定运行的网络，包括路由、交换、子网划分与网段隔离，从数据包层面理解起。",p2t:"安全",p2d:"防火墙策略、访问控制与流量分析。了解网络如何失效，是学会如何搭建它的一部分。",p3t:"系统与自动化",p3d:"Linux 系统管理与脚本编写。无法复现的配置，算不上真正的配置。",wsub:"状态如实标注。没有完成的，不会写成已完成。",w1t:"网络侦察工具",w1d:"一个 Python 命令行工具，扫描子网、识别在线主机与开放服务，并生成可比对的清单。网络上出现新设备时可以立刻发现。",w2t:"CTF 解题记录",w2d:"TryHackMe 与 HackTheBox 的解题过程，包括思路、走过的弯路，以及最后奏效的方法。",stBuild:"进行中",stPlan:"计划中",ssub:"我使用的技术，按所属层面分组。",s1:"网络",s2:"安全",s3:"系统",s4:"编程",snote:"各项掌握程度并不相同，有些经常使用，有些仍在学习。我很乐意如实说明哪些是哪些。",cProg:"进行中",cAcad:"Cisco 网络学院",cPlan:"计划中",l1:"完整的履历：学历、经历与联系方式。",l2:"我所构建工具的源代码。",l3:"构建日志：正在做什么、哪里出了问题、以及如何解决。",l1s:"主要联系方式",l2s:"首批仓库即将发布",l3s:"即将开始",ct:"欢迎联系",cd:"接受网络与安全工程方向的实习及初级职位。常驻清迈，也可远程。",copy:"复制邮箱"} };
+  var I18N = { th: {pill:"เปิดรับการฝึกงาน · 2027",lede:"ผมทำงานกับชั้นเครือข่าย ทั้งการจัดเส้นทาง การแบ่งเครือข่ายย่อย และกฎไฟร์วอลล์ที่กำหนดว่าอุปกรณ์ใดสื่อสารกับอุปกรณ์ใดได้บ้าง ปัจจุบันเป็นนักศึกษาชั้นปีที่ 3 สาขาวิศวกรรมระบบสารสนเทศและเครือข่าย มหาวิทยาลัยเชียงใหม่",cta1:"ดูผลงาน",cta2:"ติดต่อผม",n1:"กำลังเรียน",n2:"ความสนใจ",n2v:"เครือข่ายและความปลอดภัย",n3:"จบการศึกษา",cred:"บัตรประจำตัว",b1:"ชื่อ",b2:"หลักสูตร",b3:"ความสนใจ",b4:"เวลาท้องถิ่น",b5:"สถานะ",avail:"● ว่างรับงาน",ns:"เครือข่ายและความปลอดภัย",verif:"✓ ยืนยันแล้ว",a1:"หลักสูตรของผมสอนเป็นภาษาอังกฤษ ครอบคลุมโครงสร้างพื้นฐานเครือข่าย การออกแบบระบบ และความปลอดภัยของข้อมูล ผมเลือกเรียนสาขานี้เพราะอยากเข้าใจว่าข้อมูลเดินทางอย่างไร ไม่ใช่แค่ใช้เครื่องมือเป็น",a2:"การอ่านเรื่องโปรโตคอลอย่างเดียวไปได้ไม่ไกล ผมเรียนรู้จากการลงมือติดตั้ง ทำให้มันพัง แล้วหาสาเหตุว่าทำไมถึงพัง และจดบันทึกสิ่งที่เจอไว้ระหว่างทาง",f1:"การศึกษา",f1v:"กำลังศึกษาวิศวกรรมระบบสารสนเทศและเครือข่าย<br>มหาวิทยาลัยเชียงใหม่",f2:"คณะ",f2v:"คณะวิศวกรรมศาสตร์",f3:"จบการศึกษา",f4:"ที่อยู่",f4v:"เชียงใหม่ ประเทศไทย",seek:"กำลังหา · ฝึกงานด้านเครือข่ายและความปลอดภัย",fsub:"สามด้านที่ส่งเสริมกัน",p1t:"เครือข่าย",p1d:"ออกแบบและแก้ปัญหาเครือข่ายให้ทำงานได้ต่อเนื่อง ทั้งการจัดเส้นทาง สวิตชิ่ง การแบ่งซับเน็ต และการแบ่งเซกเมนต์ โดยเข้าใจตั้งแต่ระดับแพ็กเก็ตขึ้นมา",p2t:"ความปลอดภัย",p2d:"นโยบายไฟร์วอลล์ การควบคุมสิทธิ์การเข้าถึง และการวิเคราะห์ทราฟฟิก การรู้ว่าเครือข่ายพังได้อย่างไร คือส่วนหนึ่งของการรู้วิธีสร้างมัน",p3t:"ระบบและระบบอัตโนมัติ",p3d:"การดูแลระบบลินุกซ์และการเขียนสคริปต์ การตั้งค่าที่ทำซ้ำไม่ได้ ก็ไม่ถือว่าเป็นการตั้งค่าที่แท้จริง",w1t:"ชุดเครื่องมือสำรวจเครือข่าย",w2t:"บันทึกการแก้โจทย์ CTF",stBuild:"กำลังทำ",stPlan:"วางแผนไว้",ssub:"สิ่งที่ผมใช้งาน จัดกลุ่มตามหน้าที่",s1:"เครือข่าย",s2:"ความปลอดภัย",s3:"ระบบ",s4:"การเขียนโปรแกรม",snote:"ความชำนาญแต่ละอย่างไม่เท่ากัน บางอย่างใช้ประจำ บางอย่างยังเรียนรู้อยู่ ยินดีบอกตามตรงว่าอันไหนเป็นอันไหน",cProg:"กำลังเรียน",cAcad:"Cisco Networking Academy",cPlan:"วางแผนไว้",l1:"ประวัติฉบับเต็ม ทั้งการศึกษา ประสบการณ์ และช่องทางติดต่อ",l2:"ซอร์สโค้ดของเครื่องมือที่ผมสร้าง",l3:"บันทึกการทำงาน สิ่งที่กำลังทำ สิ่งที่พัง และสิ่งที่แก้ได้",l1s:"ช่องทางหลัก",l2s:"จะมีโค้ดเร็ว ๆ นี้",l3s:"เริ่มเร็ว ๆ นี้",ct:"คุยกันได้ครับ",cd:"เปิดรับการฝึกงานและตำแหน่งระดับเริ่มต้นด้านวิศวกรรมเครือข่ายและความปลอดภัย อยู่ที่เชียงใหม่ และทำงานทางไกลได้",copy:"คัดลอกอีเมล",w1d:"คอนโซลทบทวนวิชาการออกแบบและจัดการเครือข่ายคอมพิวเตอร์ ทำงานแบบออฟไลน์ได้ เขียนเป็นไฟล์ HTML ไฟล์เดียวโดยไม่พึ่งไลบรารีภายนอก ครอบคลุม VLAN, trunking, EtherChannel และการกำหนดเส้นทางระหว่าง VLAN พร้อมตัวคำนวณ Spanning Tree ตามมาตรฐาน 802.1D ที่หา root bridge บทบาทของพอร์ต และพอร์ตที่ถูกบล็อก จากโทโพโลยีที่ผู้ใช้ป้อนเข้าไป",w2d:"อีกสามคอนโซลที่สร้างจากแนวคิดเดียวกัน ได้แก่ เครือข่ายไร้สายพร้อมการวางแผนคลื่นความถี่และการใช้ช่องสัญญาณซ้ำ อัลกอริทึมและโครงสร้างข้อมูลพร้อมแบบฝึกหัดภาษา C++ และเทคโนโลยีความเป็นส่วนตัวพร้อมการวัดความเสี่ยงด้วยค่าเอนโทรปี ทุกตัวเป็นไฟล์เดียวที่ใช้งานได้โดยไม่ต้องต่ออินเทอร์เน็ต ซึ่งเป็นจุดประสงค์หลักของมัน",w3d:"เกมยิงแนวเอาชีวิตรอดแบบเลื่อนด้านข้าง 2 มิติ เขียนด้วยภาษา Java และ libGDX พัฒนาร่วมกับทีม GroupSix เป็นโปรเจกต์จบวิชาการเขียนโปรแกรมเชิงวัตถุ เป็นโค้ดขนาดใหญ่ชุดแรกที่ผมเขียนตามสถาปัตยกรรมที่คนอื่นออกแบบไว้ ไม่ใช่ของผมเอง",wsub:"ระบุสถานะตามความจริง ทุกอย่างที่เขียนว่าใช้งานได้ คือออนไลน์และใช้งานได้จริงในตอนนี้",stLive:"ใช้งานได้",stLive2:"ใช้งานได้",stTeam:"โปรเจกต์กลุ่ม",lnLive:"เปิดคอนโซล",lnAll:"ดูทั้งหมด",lnSrc:"ซอร์สโค้ด",lnSrc2:"ซอร์สโค้ด",lnSrc3:"ซอร์สโค้ด",xTo:"ถึง",xTo2:"ถึง",xTo3:"ถึง",xTo4:"ถึง",xTo5:"ถึง",xNow:"ปัจจุบัน",xNow2:"ปัจจุบัน",xPart:"งานพาร์ทไทม์",xPart2:"งานพาร์ทไทม์",xFull:"งานประจำ",xFree:"ฟรีแลนซ์",xFound:"ผู้ก่อตั้ง",x1d:"ทดสอบซอฟต์แวร์และเขียนรายงานผลด้านประสบการณ์ผู้ใช้ แจ้งปัญหาไปยังทีมที่รับผิดชอบ และทำงานร่วมกับทีมเหล่านั้นจนกว่าปัญหาจะได้รับการแก้ไข",x2o:"ทำเอง",x2d:"แบรนด์ส่วนตัวที่เผยแพร่เนื้อหาและสื่อการเรียนรู้ด้านเทคโนโลยี พร้อมกับ ZannBot บอทที่สร้างขึ้นมาเพื่อสนับสนุนงานนี้"}, zh: {pill:"接受实习机会 · 2027",lede:"我专注于网络层：路由、网段划分，以及决定哪些设备可以互相通信的防火墙策略。目前是清迈大学信息系统与网络工程专业三年级学生。",cta1:"查看项目",cta2:"联系我",n1:"在学",n2:"方向",n2v:"网络与安全",n3:"毕业年份",cred:"身份凭证",b1:"姓名",b2:"专业",b3:"方向",b4:"当地时间",b5:"状态",avail:"● 可接洽",ns:"网络与安全",verif:"✓ 已验证",a1:"我的专业以英语授课，涵盖网络基础设施、系统设计与信息安全。我选择这个方向，是想弄清楚流量究竟是如何流动的，而不只是学会操作工具。",a2:"只读协议文档走不了多远。我习惯亲手搭建、把它弄坏，再弄明白为什么会坏，并把过程记录下来。",f1:"学历",f1v:"就读信息系统与网络工程<br>清迈大学",f2:"学院",f2v:"工程学院",f3:"毕业",f4:"所在地",f4v:"泰国清迈",seek:"求职方向 · 网络与安全实习",fsub:"三个互相支撑的方向。",p1t:"网络",p1d:"设计并排查能持续稳定运行的网络，包括路由、交换、子网划分与网段隔离，从数据包层面理解起。",p2t:"安全",p2d:"防火墙策略、访问控制与流量分析。了解网络如何失效，是学会如何搭建它的一部分。",p3t:"系统与自动化",p3d:"Linux 系统管理与脚本编写。无法复现的配置，算不上真正的配置。",w1t:"网络侦察工具",w2t:"CTF 解题记录",stBuild:"进行中",stPlan:"计划中",ssub:"我使用的技术，按所属层面分组。",s1:"网络",s2:"安全",s3:"系统",s4:"编程",snote:"各项掌握程度并不相同，有些经常使用，有些仍在学习。我很乐意如实说明哪些是哪些。",cProg:"进行中",cAcad:"Cisco 网络学院",cPlan:"计划中",l1:"完整的履历：学历、经历与联系方式。",l2:"我所构建工具的源代码。",l3:"构建日志：正在做什么、哪里出了问题、以及如何解决。",l1s:"主要联系方式",l2s:"首批仓库即将发布",l3s:"即将开始",ct:"欢迎联系",cd:"接受网络与安全工程方向的实习及初级职位。常驻清迈，也可远程。",copy:"复制邮箱",w1d:"一个可离线使用的《计算机网络设计与管理》学习控制台，以单个 HTML 文件构建，不依赖任何外部库。内容涵盖 VLAN、trunking、EtherChannel 与 VLAN 间路由，并内置一个可运行的 802.1D 生成树求解器，能根据输入的拓扑计算根桥、端口角色与被阻塞的端口。",w2d:"基于同一思路构建的另外三个控制台：无线网络（含射频规划与信道复用）、算法与数据结构（含 C++ 练习），以及隐私技术（含基于熵的风险量化）。每个都是单文件，无需联网即可使用，这正是它们的意义所在。",w3d:"使用 Java 与 libGDX 编写的 2D 横版生存射击游戏，与 GroupSix 团队共同完成，是面向对象程序设计课程的期末项目。这是我第一次按照他人设计的架构编写较大规模的代码，而非自己的架构。",wsub:"状态如实标注。所有标为「已上线」的项目，此刻都真实可访问。",stLive:"已上线",stLive2:"已上线",stTeam:"团队项目",lnLive:"打开控制台",lnAll:"查看全部",lnSrc:"源代码",lnSrc2:"源代码",lnSrc3:"源代码",xTo:"至",xTo2:"至",xTo3:"至",xTo4:"至",xTo5:"至",xNow:"至今",xNow2:"至今",xPart:"兼职",xPart2:"兼职",xFull:"全职",xFree:"自由职业",xFound:"创办者",x1d:"测试软件并撰写用户体验报告，将问题反馈给相应团队，并与这些团队协作直至问题解决。",x2o:"独立运营",x2d:"发布技术内容与教育材料的个人品牌，以及为此构建的机器人 ZannBot。"} };
   var ROLES_BY = {
     en: ['network & security engineering','building infrastructure that holds','ISNE @ Chiang Mai University'],
     th: ['วิศวกรรมเครือข่ายและความปลอดภัย','สร้างโครงสร้างพื้นฐานที่มั่นคง','ISNE มหาวิทยาลัยเชียงใหม่'],
