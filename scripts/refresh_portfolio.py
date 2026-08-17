@@ -99,17 +99,29 @@ th = set_key(
     "lede",
     "ผมสร้างระบบที่ใช้งานได้จริงทั้งด้านซอฟต์แวร์ เครือข่าย และความปลอดภัย ตั้งแต่เว็บแอปและบริการแบ็กเอนด์ ไปจนถึงการออกแบบเครือข่ายและเอกสารทางเทคนิค ปัจจุบันเป็นนักศึกษาชั้นปีที่ 3 สาขาวิศวกรรมระบบสารสนเทศและเครือข่าย มหาวิทยาลัยเชียงใหม่",
 )
+th = set_key(th, "n2v", "ซอฟต์แวร์ · เครือข่าย · ความปลอดภัย")
 th = set_key(
     th,
     "wsub",
     "ผลงานที่คัดเลือกจากวิศวกรรมซอฟต์แวร์ เครือข่าย ความปลอดภัย และระบบ",
+)
+th = set_key(
+    th,
+    "w3d",
+    "เกมยิงเอาชีวิตรอดแบบเลื่อนด้านข้าง 2 มิติที่สร้างด้วย Java และ libGDX ร่วมกับทีม GroupSix สำหรับโปรเจกต์ปลายภาควิชาการเขียนโปรแกรมเชิงวัตถุ ผมได้พัฒนาประสบการณ์ด้านการออกแบบเชิงวัตถุ การทำงานร่วมกัน และการพัฒนาในโค้ดเบสที่ใช้สถาปัตยกรรมร่วมกัน",
 )
 zh = set_key(
     zh,
     "lede",
     "我构建横跨软件、网络与安全的实用系统，从已部署的 Web 应用和后端服务，到网络设计与技术文档。目前是清迈大学信息系统与网络工程专业三年级学生。",
 )
+zh = set_key(zh, "n2v", "软件 · 网络 · 安全")
 zh = set_key(zh, "wsub", "精选项目，涵盖软件工程、网络、安全与系统。")
+zh = set_key(
+    zh,
+    "w3d",
+    "使用 Java 与 libGDX 构建的 2D 横版生存射击游戏，与 GroupSix 团队共同完成，作为面向对象程序设计课程的期末项目。这个项目让我积累了面向对象设计、团队协作以及在共享架构代码库中开发的经验。",
+)
 
 if "wCulprit:" not in th:
     th = th.replace(
@@ -129,6 +141,11 @@ s = s[:i18n_start] + th + zh + s[i18n_end:]
 s = s.replace(
     '<p class="sub" data-i="wsub">Status is labelled honestly. Everything marked live is online and working right now.</p>',
     '<p class="sub" data-i="wsub">Selected projects across software engineering, networking, security, and systems.</p>',
+    1,
+)
+s = s.replace(
+    '<em data-i="n2v">Networks &amp; security</em>',
+    '<em data-i="n2v">Software · networks · security</em>',
     1,
 )
 
@@ -178,6 +195,22 @@ if "<h3>Culprit!</h3>" not in work:
         raise RuntimeError("Could not find projects container")
     work = work.replace(marker, marker + cards, 1)
 
+# Improve the existing Pavovival card instead of duplicating the project.
+work = re.sub(
+    r'<p data-i="w3d">A 2D side-scrolling survival shooter written in Java with libGDX, built with\s*GroupSix as the final project for Object-Oriented Programming\. My first substantial codebase\s*written to someone else\'s architecture rather than my own\.</p>',
+    '<p data-i="w3d">A 2D side-scrolling survival shooter built with Java and libGDX as a GroupSix Object-Oriented Programming final project. I contributed within a shared team architecture, strengthening my experience with object-oriented design, collaboration and working in an established codebase.</p>',
+    work,
+    count=1,
+)
+
 s = s[:work_start] + work + s[work_end:]
+
+# Make the visible stack reflect projects already shown above.
+s = s.replace(
+    '<h3 data-i="s4">Code</h3>\n      <ul><li>Python</li><li>Bash</li><li>C</li><li>SQL</li><li>Git</li></ul>',
+    '<h3 data-i="s4">Software &amp; Backend</h3>\n      <ul><li>Python · JavaScript</li><li>Java · C / C++</li><li>Firebase · Firestore</li><li>Cloud Functions</li><li>SQL · Git</li></ul>',
+    1,
+)
+
 path.write_text(s, encoding="utf-8")
 print("Portfolio content refreshed")
