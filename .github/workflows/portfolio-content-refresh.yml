@@ -6,6 +6,7 @@ on:
       - 'scripts/refresh_portfolio.py'
       - 'scripts/add_ieee_membership.py'
       - 'scripts/add_resume_portal.py'
+      - 'scripts/fix_resume_spacing.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -22,6 +23,7 @@ jobs:
           python scripts/refresh_portfolio.py
           python scripts/add_ieee_membership.py
           python scripts/add_resume_portal.py
+          python scripts/fix_resume_spacing.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
@@ -31,5 +33,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Add interactive resume preview"
+          git commit -m "Fix resume preview spacing"
           git push
