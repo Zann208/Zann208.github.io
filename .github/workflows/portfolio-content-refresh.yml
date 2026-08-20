@@ -9,6 +9,7 @@ on:
       - 'scripts/fix_resume_spacing.py'
       - 'scripts/enhance_resume_visibility.py'
       - 'scripts/networking_first_refresh.py'
+      - 'scripts/repair_i18n.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -28,6 +29,7 @@ jobs:
           python scripts/fix_resume_spacing.py
           python scripts/enhance_resume_visibility.py
           python scripts/networking_first_refresh.py
+          python scripts/repair_i18n.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
@@ -37,5 +39,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Refocus portfolio on network engineering"
+          git commit -m "Refresh networking-first multilingual portfolio"
           git push
