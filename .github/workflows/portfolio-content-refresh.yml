@@ -8,6 +8,7 @@ on:
       - 'scripts/add_resume_portal.py'
       - 'scripts/fix_resume_spacing.py'
       - 'scripts/enhance_resume_visibility.py'
+      - 'scripts/networking_first_refresh.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -26,6 +27,7 @@ jobs:
           python scripts/add_resume_portal.py
           python scripts/fix_resume_spacing.py
           python scripts/enhance_resume_visibility.py
+          python scripts/networking_first_refresh.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
@@ -35,5 +37,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Enhance resume visibility"
+          git commit -m "Refocus portfolio on network engineering"
           git push
