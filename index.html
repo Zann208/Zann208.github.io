@@ -718,7 +718,7 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
       <button class="btn pri" id="copy" type="button" data-i="copy">Copy email</button>
       <a class="btn" href="mailto:thuhtoozan_1@cmu.ac.th">Email <span class="ar">↗</span></a>
       <a class="btn" href="https://www.linkedin.com/in/thu-htoo-zan-8866ab377/" target="_blank" rel="noopener">LinkedIn <span class="ar">↗</span></a>
-      <button class="btn resume-hero-btn" id="resumeHero" type="button" aria-haspopup="dialog" aria-controls="resumePortal">
+      <button class="btn resume-hero-btn" id="resumeContact" type="button" aria-haspopup="dialog" aria-controls="resumePortal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:15px;height:15px"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h5M10 17h5"/></svg>
         Resume
       </button>
@@ -990,12 +990,14 @@ footer{border-top:1px solid var(--bd);padding:var(--sp-8) 0;margin-top:var(--sp-
   var closeBtn=document.getElementById('resumeClose');
   var printBtn=document.getElementById('resumePrint');
   var heroBtn=document.getElementById('resumeHero');
+  var contactBtn=document.getElementById('resumeContact');
   if(!portal||!openBtn||!closeBtn) return;
   var lastFocus=null;
   function openResume(){lastFocus=document.activeElement;portal.classList.add('open');portal.setAttribute('aria-hidden','false');openBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';setTimeout(function(){closeBtn.focus()},30)}
   function closeResume(){portal.classList.remove('open');portal.setAttribute('aria-hidden','true');openBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
   openBtn.addEventListener('click',function(){portal.classList.contains('open')?closeResume():openResume()});
   if(heroBtn)heroBtn.addEventListener('click',openResume);
+  if(contactBtn)contactBtn.addEventListener('click',openResume);
   closeBtn.addEventListener('click',closeResume);
   portal.addEventListener('click',function(e){if(e.target===portal)closeResume()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&portal.classList.contains('open'))closeResume()});
