@@ -10,6 +10,7 @@ on:
       - 'scripts/enhance_resume_visibility.py'
       - 'scripts/networking_first_refresh.py'
       - 'scripts/repair_i18n.py'
+      - 'scripts/fix_resume_contact.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -30,6 +31,7 @@ jobs:
           python scripts/enhance_resume_visibility.py
           python scripts/networking_first_refresh.py
           python scripts/repair_i18n.py
+          python scripts/fix_resume_contact.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
