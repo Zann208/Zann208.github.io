@@ -21,7 +21,6 @@ s, n = re.subn(
 if n != 1:
     raise RuntimeError('Resume profile not found')
 
-# Match the terminology used in the main portfolio and current resume.
 s = s.replace(
     '<strong>Network design &amp; switching:</strong> Routing &amp; switching, VLANs, 802.1Q trunking, STP/RSTP, EtherChannel, inter-VLAN routing, IP addressing &amp; subnetting',
     '<strong>Switching &amp; LAN:</strong> VLANs, 802.1Q trunking, STP/RSTP, EtherChannel, inter-VLAN routing, IP addressing &amp; subnetting',
@@ -30,7 +29,6 @@ s = s.replace(
 
 experience = '''<section class="resume-sec"><h3>Selected Experience</h3>
           <div class="resume-entry"><p class="resume-entry-head"><strong>Software Assurance &amp; UX Tester</strong> — Ongkanon AI &nbsp;|&nbsp; <strong>Apr 2025 - Present</strong></p><p class="resume-meta">Part-time</p><ul class="resume-bullets"><li>Test software, document functional and UX issues, report findings to the owning teams, and follow fixes through resolution.</li></ul></div>
-          <div class="resume-entry"><p class="resume-entry-head"><strong>IT Help Desk Technician</strong> — WINOSHE Safety Academy &nbsp;|&nbsp; <strong>Jan 2023 - Apr 2025</strong></p><p class="resume-meta">Myanmar · Full-time</p><ul class="resume-bullets"><li>Handled day-to-day IT support and technical troubleshooting for users and workplace technology.</li></ul></div>
         </section>'''
 
 s, n = re.subn(
@@ -58,7 +56,7 @@ s, n = re.subn(
 if n != 1:
     raise RuntimeError('Networking Projects section not found')
 
-credentials = '''<section class="resume-sec"><h3>Credentials &amp; Memberships</h3><ul class="resume-bullets"><li>Cisco Networking Academy: Networking Basics · Exploring Networking with Cisco Packet Tracer · Introduction to Cybersecurity · Ethical Hacker</li><li>KMD College: Practical Network+ Training (54 hours) · Practical A+ Training (40 hours)</li><li>Cisco CCNA - in progress · IEEE Student Member - 2026 to present</li></ul></section>'''
+credentials = '''<section class="resume-sec"><h3>Credentials &amp; Memberships</h3><ul class="resume-bullets"><li>Cisco Networking Academy: Networking Basics · Exploring Networking with Cisco Packet Tracer · Introduction to Cybersecurity · Ethical Hacker · Introduction to Modern AI</li><li>KMD College: Practical Network+ Training (54 hours) · Practical A+ Training (40 hours)</li><li>Cisco CCNA - in progress · Google Cybersecurity Certificate - in progress · IEEE Student Member - 2026 to present</li></ul></section>'''
 
 s, n = re.subn(
     r'<section class="resume-sec"><h3>(?:Certifications|Credentials) &amp; Memberships</h3>.*?</section>',
@@ -70,14 +68,14 @@ s, n = re.subn(
 if n != 1:
     raise RuntimeError('Resume credentials section not found')
 
-# Guard against the retired validation claim returning through an earlier script.
 if '20,000 randomized scenarios' in s or '20,000 randomized' in s:
     raise RuntimeError('Retired NETDES validation claim is still present')
 
 assert 'https://zann208.github.io/projects/netdes/' in s
 assert 'NETDES - Network Design &amp; Troubleshooting' in s
-assert 'Credentials &amp; Memberships' in s
-assert 'IT Help Desk Technician' in s
+assert 'Introduction to Modern AI' in s
+assert 'Google Cybersecurity Certificate - in progress' in s
+assert 'IT Help Desk Technician' not in s
 
 path.write_text(s, encoding='utf-8')
 print('Synced portfolio resume preview with current one-page resume')
