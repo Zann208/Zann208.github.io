@@ -5,6 +5,7 @@ on:
     paths:
       - 'index.html'
       - 'scripts/sync_resume_preview.py'
+      - 'scripts/faculty_accent.py'
       - '.github/workflows/resume-preview-sync.yml'
   workflow_dispatch:
 
@@ -17,7 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Apply clean resume preview
-        run: python scripts/sync_resume_preview.py
+        run: |
+          python scripts/sync_resume_preview.py
+          python scripts/faculty_accent.py
       - name: Commit resume preview
         run: |
           if git diff --quiet -- index.html; then
@@ -27,5 +30,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Apply clean aligned resume preview"
+          git commit -m "Apply clean resume with Engineering CMU accent"
           git push
