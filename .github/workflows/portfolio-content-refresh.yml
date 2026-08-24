@@ -13,6 +13,7 @@ on:
       - 'scripts/fix_resume_contact.py'
       - 'scripts/monochrome_repolish.py'
       - 'scripts/visual_hierarchy_polish.py'
+      - 'scripts/recruiter_polish.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -36,6 +37,7 @@ jobs:
           python scripts/fix_resume_contact.py
           python scripts/monochrome_repolish.py
           python scripts/visual_hierarchy_polish.py
+          python scripts/recruiter_polish.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
@@ -45,5 +47,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Polish portfolio hierarchy and credentials"
+          git commit -m "Refresh recruiter-facing portfolio content"
           git push
