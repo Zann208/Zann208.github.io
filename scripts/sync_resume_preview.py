@@ -5,68 +5,92 @@ path = Path('index.html')
 s = path.read_text(encoding='utf-8')
 
 CSS = r'''/* RESUME_CLEAN_LAYOUT_V1 */
-.resume-stage{background:#d6d6d6}
-.resume-paper{width:min(794px,100%);margin:0 auto;background:#fff;color:#171717;box-shadow:0 10px 32px rgba(0,0,0,.16);padding:40px 48px 36px;font-family:Arial,Helvetica,sans-serif;font-size:11.6px;line-height:1.32;min-height:1123px}
-.resume-paper,.resume-paper *{box-sizing:border-box}
-.resume-paper .resume-sec{padding:0;scroll-margin-top:0;margin-top:15px}
+.resume-stage{background:#d6d6d6;overflow-x:hidden}
+.resume-paper{width:min(794px,100%);max-width:100%;min-width:0;margin:0 auto;background:#fff;color:#171717;box-shadow:0 10px 32px rgba(0,0,0,.16);padding:38px 46px 34px;font-family:Arial,Helvetica,sans-serif;font-size:11.4px;line-height:1.31;min-height:1123px;overflow:hidden}
+.resume-paper,.resume-paper *{box-sizing:border-box;min-width:0}
+.resume-paper .resume-sec{padding:0;scroll-margin-top:0;margin-top:14px}
 .resume-paper p{margin:0}
 .resume-paper a{color:#222;text-decoration:none;border-bottom:1px solid #aaa}
 .resume-paper a:hover{color:#000;border-bottom-color:#222}
 .resume-head{text-align:center}
 .resume-name{margin:0;color:#111;font-size:25px;line-height:1;font-weight:700;letter-spacing:.025em}
-.resume-title{margin:7px 0 0;color:#252525;font-size:12.5px;line-height:1.25;font-weight:700}
-.resume-contact-line{margin-top:8px;display:flex;align-items:center;justify-content:center;gap:.38rem .5rem;flex-wrap:wrap;color:#555;font-size:10.5px;line-height:1.25}
+.resume-title{margin:7px 0 0;color:#252525;font-size:12.3px;line-height:1.23;font-weight:700}
+.resume-contact-line{margin-top:8px;display:flex;align-items:center;justify-content:center;gap:.32rem .48rem;flex-wrap:wrap;color:#555;font-size:10.3px;line-height:1.25}
 .resume-contact-line .sep{color:#aaa}
-.resume-rule{height:1.5px;background:#171717;margin:14px 0 0}
-.resume-sec h3{margin:0 0 7px;padding:0 0 4px;border-bottom:1px solid #999;color:#171717;font-size:10.9px;line-height:1.2;font-weight:700;letter-spacing:.095em;text-transform:uppercase}
-.resume-profile{color:#282828;line-height:1.36}
-.resume-item,.resume-project{margin-top:8px}
+.resume-rule{height:1.5px;background:#171717;margin:13px 0 0}
+.resume-sec h3{margin:0 0 6px;padding:0 0 4px;border-bottom:1px solid #9c9c9c;color:#171717;font-size:10.7px;line-height:1.2;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.resume-profile{color:#282828;line-height:1.34}
+.resume-item,.resume-project{margin-top:7px}
 .resume-item:first-of-type,.resume-project:first-of-type{margin-top:0}
-.resume-item-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:baseline}
-.resume-item-title{font-size:11.7px;line-height:1.25;color:#171717}
+.resume-item-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline}
+.resume-item-title{font-size:11.5px;line-height:1.24;color:#171717}
 .resume-item-title strong{font-weight:700}
 .resume-place{color:#555;font-weight:400}
-.resume-date{white-space:nowrap;color:#333;font-size:10.8px;font-weight:700;text-align:right}
-.resume-meta{margin-top:2px!important;color:#555;font-size:10.7px;line-height:1.28}
+.resume-date{white-space:nowrap;color:#333;font-size:10.6px;font-weight:700;text-align:right}
+.resume-meta{margin-top:2px!important;color:#555;font-size:10.5px;line-height:1.26}
 .resume-skill-grid{display:grid;gap:3px}
-.resume-skill-row{display:grid;grid-template-columns:148px minmax(0,1fr);gap:8px;align-items:start}
+.resume-skill-row{display:grid;grid-template-columns:136px minmax(0,1fr);gap:8px;align-items:start}
 .resume-skill-row b{font-weight:700;color:#1b1b1b}
-.resume-skill-row span{color:#333}
-.resume-bullets{margin:4px 0 0;padding-left:16px}
-.resume-bullets li{margin:2px 0;line-height:1.3;color:#2d2d2d;padding-left:1px}
-.resume-project-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:baseline}
-.resume-project-name{font-size:11.7px;font-weight:700;color:#171717}
-.resume-project-links{display:flex;gap:6px;white-space:nowrap;font-size:10.2px}
+.resume-skill-row span{color:#333;overflow-wrap:anywhere}
+.resume-bullets{margin:3px 0 0;padding-left:16px}
+.resume-bullets li{margin:1.5px 0;line-height:1.28;color:#2d2d2d;padding-left:1px}
+.resume-project-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:baseline}
+.resume-project-name{font-size:11.5px;font-weight:700;color:#171717;overflow-wrap:anywhere}
+.resume-project-links{display:flex;gap:6px;white-space:nowrap;font-size:10px}
 .resume-project-links a{font-weight:600}
-.resume-cred-list{display:grid;gap:4px}
-.resume-cred-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:9px;align-items:start}
-.resume-cred-row b{color:#1b1b1b;font-weight:700}
-.resume-cred-row span{color:#333}
+
+/* Credentials: no separator chains and no fixed text column. */
+.resume-cred-stack{display:grid;gap:8px}
+.resume-cred-group{display:grid;grid-template-columns:124px minmax(0,1fr);gap:10px;align-items:start;padding-bottom:6px;border-bottom:1px solid #e2e2e2}
+.resume-cred-group:last-child{border-bottom:0;padding-bottom:0}
+.resume-cred-label{font-size:10.5px;line-height:1.25;font-weight:700;color:#1c1c1c}
+.resume-cred-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 14px}
+.resume-cred-items.one{grid-template-columns:1fr}
+.resume-cred-item{position:relative;padding-left:9px;color:#333;line-height:1.27;overflow-wrap:anywhere}
+.resume-cred-item::before{content:"";position:absolute;left:0;top:.54em;width:3px;height:3px;border-radius:50%;background:#555}
+.resume-cred-item strong{color:#222;font-weight:700}
+.resume-cred-item small{display:block;margin-top:1px;color:#686868;font-size:9.7px;line-height:1.2}
+
 @media(max-width:680px){
-  .resume-paper{padding:28px 24px 26px;font-size:11px;min-height:auto}
-  .resume-name{font-size:22px}.resume-title{font-size:11.6px}
-  .resume-contact-line{font-size:9.8px}
+  .resume-paper{padding:27px 22px 25px;font-size:10.9px;min-height:auto}
+  .resume-name{font-size:22px}.resume-title{font-size:11.4px}
+  .resume-contact-line{font-size:9.6px}
   .resume-item-top,.resume-project-top{grid-template-columns:1fr;gap:2px}
   .resume-date{text-align:left;color:#555}
   .resume-project-links{white-space:normal;flex-wrap:wrap}
-  .resume-skill-row,.resume-cred-row{grid-template-columns:1fr;gap:1px}
-  .resume-skill-row b,.resume-cred-row b{margin-top:2px}
+  .resume-skill-row{grid-template-columns:1fr;gap:1px}
+  .resume-skill-row b{margin-top:2px}
+  .resume-cred-group{grid-template-columns:1fr;gap:4px}
+  .resume-cred-items{grid-template-columns:1fr}
+  .resume-cred-label{font-size:10.3px}
+}
+@media(max-width:470px){
+  .resume-stage{padding:.35rem!important}
+  .resume-paper{padding:22px 16px 23px}
+  .resume-contact-line{gap:.25rem .38rem}
+  .resume-contact-line .sep{display:none}
+  .resume-project-links{gap:5px}
 }
 @media print{
-  body.resume-printing .resume-paper{padding:.40in .48in!important;font-size:8.9pt!important;line-height:1.28!important;color:#111!important}
-  body.resume-printing .resume-name{font-size:19pt!important}
-  body.resume-printing .resume-title{font-size:9.7pt!important}
-  body.resume-printing .resume-contact-line{font-size:8pt!important;margin-top:5pt!important}
-  body.resume-printing .resume-rule{margin-top:9pt!important}
-  body.resume-printing .resume-sec{margin-top:8.5pt!important}
-  body.resume-printing .resume-sec h3{font-size:8.7pt!important;margin-bottom:4.5pt!important;padding-bottom:2.5pt!important}
-  body.resume-printing .resume-item-title,body.resume-printing .resume-project-name{font-size:9pt!important}
-  body.resume-printing .resume-date,body.resume-printing .resume-meta{font-size:8.1pt!important}
-  body.resume-printing .resume-project-links{font-size:7.8pt!important}
-  body.resume-printing .resume-bullets{margin-top:2.5pt!important}
-  body.resume-printing .resume-bullets li{margin:1pt 0!important}
-  body.resume-printing .resume-skill-row{grid-template-columns:1.32in minmax(0,1fr)!important}
-  body.resume-printing .resume-cred-row{grid-template-columns:1.42in minmax(0,1fr)!important}
+  body.resume-printing .resume-paper{padding:.36in .44in!important;font-size:8.65pt!important;line-height:1.25!important;color:#111!important;overflow:visible!important}
+  body.resume-printing .resume-name{font-size:18.5pt!important}
+  body.resume-printing .resume-title{font-size:9.4pt!important}
+  body.resume-printing .resume-contact-line{font-size:7.8pt!important;margin-top:4.5pt!important}
+  body.resume-printing .resume-rule{margin-top:8pt!important}
+  body.resume-printing .resume-sec{margin-top:7.5pt!important}
+  body.resume-printing .resume-sec h3{font-size:8.5pt!important;margin-bottom:4pt!important;padding-bottom:2.3pt!important}
+  body.resume-printing .resume-item-title,body.resume-printing .resume-project-name{font-size:8.8pt!important}
+  body.resume-printing .resume-date,body.resume-printing .resume-meta{font-size:7.9pt!important}
+  body.resume-printing .resume-project-links{font-size:7.5pt!important}
+  body.resume-printing .resume-bullets{margin-top:2pt!important}
+  body.resume-printing .resume-bullets li{margin:.8pt 0!important}
+  body.resume-printing .resume-skill-row{grid-template-columns:1.22in minmax(0,1fr)!important}
+  body.resume-printing .resume-cred-stack{gap:4.5pt!important}
+  body.resume-printing .resume-cred-group{grid-template-columns:1.12in minmax(0,1fr)!important;gap:6pt!important;padding-bottom:3.5pt!important}
+  body.resume-printing .resume-cred-label{font-size:7.9pt!important}
+  body.resume-printing .resume-cred-items{gap:1.5pt 8pt!important}
+  body.resume-printing .resume-cred-item{font-size:7.9pt!important;line-height:1.2!important;padding-left:7pt!important}
+  body.resume-printing .resume-cred-item small{font-size:7.1pt!important}
 }
 /* /RESUME_CLEAN_LAYOUT_V1 */'''
 
@@ -153,10 +177,37 @@ resume = '''<article class="resume-paper" id="resumePaper" aria-label="Thu Htoo 
 
         <section class="resume-sec">
           <h3>Credentials &amp; Memberships</h3>
-          <div class="resume-cred-list">
-            <div class="resume-cred-row"><b>Cisco Networking Academy</b><span>Networking Basics · Exploring Networking with Cisco Packet Tracer · Introduction to Cybersecurity · Ethical Hacker · Introduction to Modern AI</span></div>
-            <div class="resume-cred-row"><b>Technical training</b><span>Practical Network+ Training (54 hours) · Practical A+ Training (40 hours), KMD College</span></div>
-            <div class="resume-cred-row"><b>Current</b><span>Cisco CCNA (in progress) · Google Cybersecurity Certificate (in progress) · IEEE Student Member (2026 – Present)</span></div>
+          <div class="resume-cred-stack">
+            <div class="resume-cred-group">
+              <p class="resume-cred-label">Cisco Networking Academy</p>
+              <div class="resume-cred-items">
+                <span class="resume-cred-item">Networking Basics</span>
+                <span class="resume-cred-item">Exploring Networking with Cisco Packet Tracer</span>
+                <span class="resume-cred-item">Introduction to Cybersecurity</span>
+                <span class="resume-cred-item">Ethical Hacker</span>
+                <span class="resume-cred-item">Introduction to Modern AI</span>
+              </div>
+            </div>
+            <div class="resume-cred-group">
+              <p class="resume-cred-label">Technical Training</p>
+              <div class="resume-cred-items">
+                <span class="resume-cred-item"><strong>Practical Network+</strong><small>KMD College · 54 hours</small></span>
+                <span class="resume-cred-item"><strong>Practical A+</strong><small>KMD College · 40 hours</small></span>
+              </div>
+            </div>
+            <div class="resume-cred-group">
+              <p class="resume-cred-label">In Progress</p>
+              <div class="resume-cred-items">
+                <span class="resume-cred-item">Cisco CCNA</span>
+                <span class="resume-cred-item">Google Cybersecurity Certificate</span>
+              </div>
+            </div>
+            <div class="resume-cred-group">
+              <p class="resume-cred-label">Membership</p>
+              <div class="resume-cred-items one">
+                <span class="resume-cred-item"><strong>IEEE Student Member</strong><small>2026 – Present</small></span>
+              </div>
+            </div>
           </div>
         </section>
       </article>'''
@@ -170,13 +221,13 @@ if '20,000 randomized scenarios' in s or '20,000 randomized' in s:
     raise RuntimeError('Retired NETDES validation claim is still present')
 
 assert 'RESUME_CLEAN_LAYOUT_V1' in s
-assert 'resume-item-top' in s
-assert 'resume-skill-row' in s
-assert 'resume-cred-row' in s
+assert 'resume-cred-stack' in s
+assert 'resume-cred-group' in s
+assert 'resume-cred-items' in s
 assert 'IT Help Desk Technician' not in s
 assert 'Exploring Networking with Cisco Packet Tracer' in s
 assert 'Introduction to Modern AI' in s
-assert 'Google Cybersecurity Certificate (in progress)' in s
+assert 'Google Cybersecurity Certificate' in s
 
 path.write_text(s, encoding='utf-8')
-print('Cleaned resume typography, rules, spacing and alignment')
+print('Applied final clean responsive resume layout')
