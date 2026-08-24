@@ -15,6 +15,7 @@ on:
       - 'scripts/visual_hierarchy_polish.py'
       - 'scripts/recruiter_polish.py'
       - 'scripts/sync_resume_preview.py'
+      - 'scripts/faculty_accent.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -39,8 +40,9 @@ jobs:
           python scripts/monochrome_repolish.py
           python scripts/visual_hierarchy_polish.py
           python scripts/recruiter_polish.py
-          # Resume sync must stay last so earlier generators cannot restore the old resume markup.
           python scripts/sync_resume_preview.py
+          # Faculty accent stays last so black/white remains the base and burgundy is only the final identity layer.
+          python scripts/faculty_accent.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
@@ -50,5 +52,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Refresh clean aligned portfolio resume"
+          git commit -m "Refresh portfolio with Engineering CMU accent"
           git push
