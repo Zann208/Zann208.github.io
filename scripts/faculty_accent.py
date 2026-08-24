@@ -8,6 +8,8 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 :root{
   --fac:#5d171b;
   --fac-hi:#c15a62;
+  --fac-title:#d07a80;
+  --fac-muted:#946166;
   --fac-soft:rgba(93,23,27,.20);
   --fac-soft2:rgba(193,90,98,.09);
   --fac-border:rgba(193,90,98,.38);
@@ -15,6 +17,8 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 [data-theme="light"]{
   --fac:#5d171b;
   --fac-hi:#741f26;
+  --fac-title:#681a20;
+  --fac-muted:#8b5b60;
   --fac-soft:rgba(93,23,27,.10);
   --fac-soft2:rgba(93,23,27,.055);
   --fac-border:rgba(93,23,27,.28);
@@ -22,7 +26,10 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 
 /* Portfolio identity: black/white stays dominant; burgundy marks the important bits. */
 .brand span{color:var(--fac-hi)!important;text-shadow:none!important}
+.shead h2{color:var(--fac-title)!important}
 .shead h2::before{color:var(--fac-hi)!important;text-shadow:none!important}
+.shead .rule{background:linear-gradient(90deg,var(--fac-border),rgba(193,90,98,.10),transparent)!important}
+.shead .n{color:var(--fac-muted)!important}
 .nav-links a.on{color:var(--fac-hi)!important;background:var(--fac-soft2)!important}
 .lang button[aria-pressed="true"]{color:var(--fac-hi)!important;background:var(--fac-soft2)!important}
 .pill{color:var(--fac-hi)!important;border-color:var(--fac-border)!important;background:var(--fac-soft2)!important;box-shadow:none!important}
@@ -34,6 +41,9 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 .proj:first-child .plinks a:first-child:hover{color:#fff!important}
 .cert.done .mk{color:var(--fac-hi)!important;border-color:var(--fac-border)!important;background:var(--fac-soft2)!important;text-shadow:none!important;box-shadow:none!important}
 .cert.done:hover{border-color:var(--fac-border)!important;box-shadow:none!important}
+
+/* Keep content titles white so the section hierarchy stays clear. */
+.proj h3,.pil h3,.xp h3,.cert h4,.hero h1{color:var(--fg)!important}
 
 /* Resume is the strongest recruiter action. */
 .resume-nav-btn{background:var(--fac)!important;border-color:var(--fac)!important;color:#fff!important;box-shadow:none!important}
@@ -70,8 +80,10 @@ else:
     s = s.replace('</style>', '\n' + CSS + '\n</style>', 1)
 
 assert '--fac:#5d171b' in s
+assert '--fac-title:#d07a80' in s
 assert 'FACULTY_ACCENT_V1' in s
+assert '.shead h2{color:var(--fac-title)!important}' in s
 assert '.resume-paper .resume-sec h3{color:var(--fac)!important' in s
 
 path.write_text(s, encoding='utf-8')
-print('Applied Engineering CMU burgundy secondary accent')
+print('Applied Engineering CMU burgundy secondary accent with section headers')
