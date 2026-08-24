@@ -1,0 +1,31 @@
+name: Resume preview sync
+
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'scripts/sync_resume_preview.py'
+      - '.github/workflows/resume-preview-sync.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply clean resume preview
+        run: python scripts/sync_resume_preview.py
+      - name: Commit resume preview
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "Resume preview already clean"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Apply clean aligned resume preview"
+          git push
