@@ -11,6 +11,7 @@ on:
       - 'scripts/networking_first_refresh.py'
       - 'scripts/repair_i18n.py'
       - 'scripts/fix_resume_contact.py'
+      - 'scripts/monochrome_repolish.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -32,6 +33,7 @@ jobs:
           python scripts/networking_first_refresh.py
           python scripts/repair_i18n.py
           python scripts/fix_resume_contact.py
+          python scripts/monochrome_repolish.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
@@ -41,5 +43,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Refresh networking-first multilingual portfolio"
+          git commit -m "Repolish portfolio in monochrome"
           git push
