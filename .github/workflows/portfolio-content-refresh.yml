@@ -14,6 +14,7 @@ on:
       - 'scripts/monochrome_repolish.py'
       - 'scripts/visual_hierarchy_polish.py'
       - 'scripts/recruiter_polish.py'
+      - 'scripts/sync_resume_preview.py'
       - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
@@ -38,6 +39,7 @@ jobs:
           python scripts/monochrome_repolish.py
           python scripts/visual_hierarchy_polish.py
           python scripts/recruiter_polish.py
+          python scripts/sync_resume_preview.py
       - name: Commit portfolio update
         run: |
           if git diff --quiet -- index.html; then
