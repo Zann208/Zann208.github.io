@@ -39,6 +39,7 @@ jobs:
           python scripts/monochrome_repolish.py
           python scripts/visual_hierarchy_polish.py
           python scripts/recruiter_polish.py
+          # Resume sync must stay last so earlier generators cannot restore the old resume markup.
           python scripts/sync_resume_preview.py
       - name: Commit portfolio update
         run: |
@@ -49,5 +50,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "Refresh recruiter-facing portfolio content"
+          git commit -m "Refresh clean aligned portfolio resume"
           git push
