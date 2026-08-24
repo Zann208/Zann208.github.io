@@ -13,6 +13,8 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
   --fac-soft:rgba(93,23,27,.20);
   --fac-soft2:rgba(193,90,98,.09);
   --fac-border:rgba(193,90,98,.38);
+  --fac-glow:rgba(193,90,98,.34);
+  --fac-glow-soft:rgba(93,23,27,.18);
 }
 [data-theme="light"]{
   --fac:#5d171b;
@@ -22,18 +24,21 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
   --fac-soft:rgba(93,23,27,.10);
   --fac-soft2:rgba(93,23,27,.055);
   --fac-border:rgba(93,23,27,.28);
+  --fac-glow:rgba(93,23,27,.18);
+  --fac-glow-soft:rgba(93,23,27,.08);
 }
 
 /* Portfolio identity: black/white stays dominant; burgundy marks the important bits. */
 .brand span{color:var(--fac-hi)!important;text-shadow:none!important}
 .shead h2{color:var(--fac-title)!important}
-.shead h2::before{color:var(--fac-hi)!important;text-shadow:none!important}
+.shead h2::before{color:var(--fac-hi)!important;animation:facultySignal 3.8s ease-in-out infinite}
 .shead .rule{background:linear-gradient(90deg,var(--fac-border),rgba(193,90,98,.10),transparent)!important}
 .shead .n{color:var(--fac-muted)!important}
 .nav-links a.on{color:var(--fac-hi)!important;background:var(--fac-soft2)!important}
 .lang button[aria-pressed="true"]{color:var(--fac-hi)!important;background:var(--fac-soft2)!important}
 .pill{color:var(--fac-hi)!important;border-color:var(--fac-border)!important;background:var(--fac-soft2)!important;box-shadow:none!important}
-.dot,.role .cur{background:var(--fac-hi)!important;box-shadow:none!important}
+.dot{background:var(--fac-hi)!important;animation:facultyDotSignal 4.2s ease-in-out infinite!important}
+.role .cur{background:var(--fac-hi)!important;box-shadow:none!important}
 .pil .ic{color:var(--fac-hi)!important;filter:none!important}
 .pil:hover{border-color:var(--fac-border)!important;box-shadow:none!important}
 .proj:first-child .idx{color:var(--fac-hi)!important}
@@ -41,6 +46,18 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 .proj:first-child .plinks a:first-child:hover{color:#fff!important}
 .cert.done .mk{color:var(--fac-hi)!important;border-color:var(--fac-border)!important;background:var(--fac-soft2)!important;text-shadow:none!important;box-shadow:none!important}
 .cert.done:hover{border-color:var(--fac-border)!important;box-shadow:none!important}
+
+@keyframes facultySignal{
+  0%,100%{text-shadow:0 0 3px var(--fac-glow-soft)}
+  50%{text-shadow:0 0 7px var(--fac-glow),0 0 14px var(--fac-glow-soft)}
+}
+@keyframes facultyDotSignal{
+  0%,100%{box-shadow:0 0 0 0 rgba(193,90,98,.08),0 0 3px var(--fac-glow-soft)}
+  50%{box-shadow:0 0 0 4px rgba(193,90,98,.035),0 0 8px var(--fac-glow)}
+}
+@media(prefers-reduced-motion:reduce){
+  .shead h2::before,.dot{animation:none!important;text-shadow:none!important;box-shadow:none!important}
+}
 
 /* Keep content titles white so the section hierarchy stays clear. */
 .proj h3,.pil h3,.xp h3,.cert h4,.hero h1{color:var(--fg)!important}
@@ -52,7 +69,7 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 .resume-hero-btn:hover{color:#fff!important;border-color:var(--fac-hi)!important;background:var(--fac)!important;box-shadow:none!important}
 .resume-toolbar{border-bottom-color:var(--fac-border)!important}
 
-/* Resume paper: faculty burgundy works naturally on white. */
+/* Resume paper stays static and print-friendly. */
 .resume-paper .resume-rule{background:var(--fac)!important}
 .resume-paper .resume-sec h3{color:var(--fac)!important;border-bottom-color:#d8b9bb!important}
 .resume-paper a{color:var(--fac)!important;border-bottom-color:#cfaeb1!important}
@@ -81,9 +98,12 @@ else:
 
 assert '--fac:#5d171b' in s
 assert '--fac-title:#d07a80' in s
+assert '@keyframes facultySignal' in s
+assert '@keyframes facultyDotSignal' in s
+assert 'prefers-reduced-motion:reduce' in s
 assert 'FACULTY_ACCENT_V1' in s
 assert '.shead h2{color:var(--fac-title)!important}' in s
 assert '.resume-paper .resume-sec h3{color:var(--fac)!important' in s
 
 path.write_text(s, encoding='utf-8')
-print('Applied Engineering CMU burgundy secondary accent with section headers')
+print('Applied subtle Engineering CMU network signal pulse')
