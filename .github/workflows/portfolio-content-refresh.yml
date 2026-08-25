@@ -1,8 +1,11 @@
-name: Portfolio content refresh
+name: Portfolio identity migration
 
-# Maintenance workflow only. Run this manually when intentionally rebuilding the
-# portfolio from the helper scripts. Normal content edits must not rewrite index.html.
+# Temporary one-shot migration runner. The push trigger is limited to the
+# migration script itself so generated portfolio commits cannot loop.
 on:
+  push:
+    paths:
+      - 'scripts/apply_portfolio_identity.py'
   workflow_dispatch:
 
 permissions:
@@ -13,34 +16,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  refresh:
+  migrate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Refresh portfolio content
+      - name: Apply authored portfolio identity
+        run: python scripts/apply_portfolio_identity.py
+      - name: Commit migrated portfolio
         run: |
-          python scripts/refresh_portfolio.py
-          python scripts/add_ieee_membership.py
-          python scripts/add_resume_portal.py
-          python scripts/fix_resume_spacing.py
-          python scripts/enhance_resume_visibility.py
-          python scripts/networking_first_refresh.py
-          python scripts/repair_i18n.py
-          python scripts/fix_resume_contact.py
-          python scripts/monochrome_repolish.py
-          python scripts/visual_hierarchy_polish.py
-          python scripts/recruiter_polish.py
-          python scripts/sync_resume_preview.py
-          # Faculty accent stays last so black/white remains the base and burgundy is only the final identity layer.
-          python scripts/faculty_accent.py
-      - name: Commit portfolio update
-        run: |
-          if git diff --quiet -- index.html; then
-            echo "No portfolio changes needed"
+          if git diff --quiet -- index.html projects/netdes/index.html; then
+            echo "Portfolio already migrated"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Refresh portfolio with Engineering CMU accent"
+          git add index.html projects/netdes/index.html
+          git commit -m "Refactor portfolio into infrastructure dossier"
           git push
