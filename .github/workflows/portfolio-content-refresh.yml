@@ -1,26 +1,16 @@
 name: Portfolio content refresh
 
+# Maintenance workflow only. Run this manually when intentionally rebuilding the
+# portfolio from the helper scripts. Normal content edits must not rewrite index.html.
 on:
-  push:
-    paths:
-      - 'scripts/refresh_portfolio.py'
-      - 'scripts/add_ieee_membership.py'
-      - 'scripts/add_resume_portal.py'
-      - 'scripts/fix_resume_spacing.py'
-      - 'scripts/enhance_resume_visibility.py'
-      - 'scripts/networking_first_refresh.py'
-      - 'scripts/repair_i18n.py'
-      - 'scripts/fix_resume_contact.py'
-      - 'scripts/monochrome_repolish.py'
-      - 'scripts/visual_hierarchy_polish.py'
-      - 'scripts/recruiter_polish.py'
-      - 'scripts/sync_resume_preview.py'
-      - 'scripts/faculty_accent.py'
-      - '.github/workflows/portfolio-content-refresh.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: portfolio-maintenance
+  cancel-in-progress: false
 
 jobs:
   refresh:
