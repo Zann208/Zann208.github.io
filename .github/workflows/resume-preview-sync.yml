@@ -1,16 +1,17 @@
 name: Resume preview sync
 
+# Maintenance workflow only. Run manually after intentionally changing the
+# resume-generation helpers. It must not rewrite the portfolio after every
+# index.html edit.
 on:
-  push:
-    paths:
-      - 'index.html'
-      - 'scripts/sync_resume_preview.py'
-      - 'scripts/faculty_accent.py'
-      - '.github/workflows/resume-preview-sync.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: portfolio-maintenance
+  cancel-in-progress: false
 
 jobs:
   sync:
