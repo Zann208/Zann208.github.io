@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NETDES Case Study | Thu Htoo Zan</title>
 <meta name="description" content="NETDES case study: how I turned Computer Network Design & Management course material into an offline console for labs, verification and STP practice.">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#080808">
 <link rel="canonical" href="https://zann208.github.io/projects/netdes/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,7 +63,7 @@ show interfaces fa0/1 switchport</pre></div></div><p class="code-note">Example t
 
 <section class="sec"><div class="wrap sec-grid"><div class="sec-no">What changed</div><div class="copy"><h2>What the project forced me to understand</h2><p>Reading that the “lowest Bridge ID wins” is easy. Implementing the full decision path exposed the details that are easy to skip when studying: what happens when path costs tie, which port ID is compared, and why a link is designated on one side but blocked on the other.</p><p>The same thing happened with configuration. Writing a command is only half the task. The lab pages made me keep the expected verification output close to the configuration, which is closer to how troubleshooting actually works.</p><p>NETDES is still a study console, but the part I value is the reasoning behind it: translating written network rules into repeatable decisions and checking those decisions against device output.</p></div></div></section>
 
-<section class="sec"><div class="wrap sec-grid"><div class="sec-no">Current state</div><div class="copy"><h2>What I would improve next</h2><p>I keep the public claims on this page to what can be checked in the current repository. The solver is present in <code>index.html</code>, and the lab content is visible in the console.</p><div class="next"><div><b>01</b>Restore standalone automated tests for the STP solver so validation can be rerun directly from the repository.</div><div><b>02</b>Add small topology examples to the case study so the STP role decisions can be followed visually.</div><div><b>03</b>Split course data and solver logic out of the single HTML file if the console grows beyond a practical one-file tool.</div></div></div></div></section>
+<section class="sec"><div class="wrap sec-grid"><div class="sec-no">Current state</div><div class="copy"><h2>What I would improve next</h2><p>I keep the public claims on this page to what can be checked in the current repository. The solver is present in <code>index.html</code>, and the lab content is visible in the console.</p><div class="next"><div>Restore standalone automated tests for the STP solver so validation can be rerun directly from the repository.</div><div>Add small topology examples to the case study so the STP role decisions can be followed visually.</div><div>Split course data and solver logic out of the single HTML file if the console grows beyond a practical one-file tool.</div></div></div></div></section>
 </main>
 <footer class="wrap footer"><span>Thu Htoo Zan · Network Engineering</span><span>NETDES case study</span></footer>
 </div>
