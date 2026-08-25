@@ -1,11 +1,8 @@
-name: Portfolio V3 refinement
+name: Portfolio identity maintenance
 
-# Temporary one-shot refinement trigger. The push trigger is limited to the V3
-# refinement script so generated portfolio commits cannot loop.
+# Manual-only safety workflow. Normal content edits should not rebuild the
+# portfolio. Run only when intentionally reapplying the canonical design system.
 on:
-  push:
-    paths:
-      - 'scripts/refine_portfolio_v3.py'
   workflow_dispatch:
 
 permissions:
@@ -16,23 +13,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  refine:
+  maintain:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply V3 portfolio refinement
+      - name: Apply canonical portfolio identity
         run: |
           python scripts/apply_portfolio_identity.py
           python scripts/finalize_portfolio_identity.py
           python scripts/refine_portfolio_v3.py
-      - name: Commit V3 refinement
+      - name: Commit intentional maintenance update
         run: |
           if git diff --quiet -- index.html projects/netdes/index.html; then
-            echo "Portfolio already refined"
+            echo "Portfolio identity already current"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html projects/netdes/index.html
-          git commit -m "Refine portfolio interactions and credentials"
+          git commit -m "Maintain portfolio identity system"
           git push
