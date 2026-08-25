@@ -42,10 +42,40 @@ CSS = r'''/* FACULTY_ACCENT_V1 */
 .pil .ic{color:var(--fac-hi)!important;filter:none!important}
 .pil:hover{border-color:var(--fac-border)!important;box-shadow:none!important}
 .proj:first-child .idx{color:var(--fac-hi)!important}
-.proj:first-child .plinks a:first-child{color:var(--fac-hi)!important;font-weight:700}
-.proj:first-child .plinks a:first-child:hover{color:#fff!important}
 .cert.done .mk{color:var(--fac-hi)!important;border-color:var(--fac-border)!important;background:var(--fac-soft2)!important;text-shadow:none!important;box-shadow:none!important}
 .cert.done:hover{border-color:var(--fac-border)!important;box-shadow:none!important}
+
+/* Project actions: live/demo first, case study second, source/repo supporting. */
+.plinks a{
+  color:var(--fac-hi)!important;
+  font-weight:650!important;
+  transition:color .2s,border-color .2s,opacity .2s!important;
+}
+.plinks a:hover{color:#fff!important;text-shadow:none!important}
+/* Case studies remain accented, but intentionally quieter than live products. */
+.plinks a[href*="/projects/"],
+.plinks a[href*="/projects/"][href*="github.com"]{
+  color:var(--fac-title)!important;
+  font-weight:600!important;
+}
+/* Repositories and source links are evidence, not the primary action. */
+.plinks a[href*="github.com"]{
+  color:var(--fg2)!important;
+  font-weight:500!important;
+}
+/* A project case-study URL wins over the GitHub/source rule above. */
+.plinks a[href*="github.com"][href*="/projects/"],
+.plinks a[href*="zann208.github.io/projects/"]{
+  color:var(--fac-title)!important;
+  font-weight:600!important;
+}
+/* Third and later actions are supporting links unless they are explicitly a case study. */
+.plinks a:nth-child(n+3):not([href*="/projects/"]){
+  color:var(--fg3)!important;
+  font-weight:500!important;
+}
+.plinks a[href*="github.com"]:hover,
+.plinks a:nth-child(n+3):hover{color:var(--fac-hi)!important}
 
 @keyframes facultySignal{
   0%,100%{text-shadow:0 0 3px var(--fac-glow-soft)}
@@ -98,12 +128,10 @@ else:
 
 assert '--fac:#5d171b' in s
 assert '--fac-title:#d07a80' in s
-assert '@keyframes facultySignal' in s
-assert '@keyframes facultyDotSignal' in s
-assert 'prefers-reduced-motion:reduce' in s
+assert '.plinks a{' in s
+assert '.plinks a[href*="github.com"]{' in s
+assert 'zann208.github.io/projects/' in s
 assert 'FACULTY_ACCENT_V1' in s
-assert '.shead h2{color:var(--fac-title)!important}' in s
-assert '.resume-paper .resume-sec h3{color:var(--fac)!important' in s
 
 path.write_text(s, encoding='utf-8')
-print('Restored previous Engineering CMU accent treatment')
+print('Applied semantic project action hierarchy')
