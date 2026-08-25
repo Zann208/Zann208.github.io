@@ -1,3 +1,4 @@
+# V3 interaction refinement trigger
 from pathlib import Path
 import re
 
@@ -132,10 +133,7 @@ portal_css = r'''/* RESUME_PORTAL_V3 */
 @media(max-width:470px){.resume-backdrop{padding:.35rem}.resume-paper{padding:22px 16px 23px}.resume-actions{gap:.28rem}.resume-action{padding:.45rem .55rem}}
 @media print{body.resume-printing>*:not(#resumePortal){display:none!important}body.resume-printing #resumePortal{position:static!important;display:block!important;background:none!important;padding:0!important;overflow:visible!important}body.resume-printing .resume-shell{width:auto!important;border:0!important;box-shadow:none!important;border-radius:0!important}body.resume-printing .resume-toolbar{display:none!important}body.resume-printing .resume-stage{padding:0!important;background:#fff!important}@page{size:A4;margin:0}}
 /* /RESUME_PORTAL_V3 */'''
-s, n = re.subn(r"/\* RESUME_PORTAL_V1 \*/.*?(?=/\* HIERARCHY_POLISH_V2 \*/|/\* RESUME_CLEAN_LAYOUT_V1 \*/)", portal_css + "\n\n", s, count=1, flags=re.S)
-if n != 1:
-    # HIERARCHY block was already removed above, so match directly to clean layout.
-    s, n = re.subn(r"/\* RESUME_PORTAL_V1 \*/.*?(?=/\* RESUME_CLEAN_LAYOUT_V1 \*/)", portal_css + "\n\n", s, count=1, flags=re.S)
+s, n = re.subn(r"/\* RESUME_PORTAL_V1 \*/.*?(?=/\* RESUME_CLEAN_LAYOUT_V1 \*/)", portal_css + "\n\n", s, count=1, flags=re.S)
 if n != 1:
     raise RuntimeError("Legacy resume portal block not found")
 
