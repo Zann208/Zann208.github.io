@@ -1,11 +1,8 @@
-name: Portfolio identity finalization
+name: Portfolio identity maintenance
 
-# Temporary one-shot finalization trigger. It is limited to the finalizer
-# script and will be removed after the generated cleanup commit.
+# Manual-only safety workflow. Normal content edits should not rebuild the
+# portfolio. Run only when intentionally reapplying the canonical design system.
 on:
-  push:
-    paths:
-      - 'scripts/finalize_portfolio_identity.py'
   workflow_dispatch:
 
 permissions:
@@ -16,20 +13,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  finalize:
+  maintain:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Apply final portfolio cleanup
-        run: python scripts/finalize_portfolio_identity.py
-      - name: Commit final cleanup
+      - name: Apply canonical portfolio identity
+        run: |
+          python scripts/apply_portfolio_identity.py
+          python scripts/finalize_portfolio_identity.py
+      - name: Commit intentional maintenance update
         run: |
           if git diff --quiet -- index.html projects/netdes/index.html; then
-            echo "Portfolio already finalized"
+            echo "Portfolio identity already current"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html projects/netdes/index.html
-          git commit -m "Finish multilingual portfolio cleanup"
+          git commit -m "Maintain portfolio identity system"
           git push
