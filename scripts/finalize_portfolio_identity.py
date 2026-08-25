@@ -20,9 +20,11 @@ netdes = Path('projects/netdes/index.html')
 n = netdes.read_text(encoding='utf-8')
 n = n.replace('<meta name="theme-color" content="#050505">', '<meta name="theme-color" content="#080808">', 1)
 
-# Remove the final decorative ordinals from the improvement list while keeping
-# semantic figures such as 16 decks, 12 labs and IEEE 802.1D intact.
-n = re.sub(r'<b>0[1-9]</b>(?=[A-Z])', '', n)
+# The only remaining 01/02/03 markers are decorative ordinals inside the
+# translated "next improvements" lists. Remove them in every language while
+# preserving semantic quantities such as 16 decks, 12 labs and IEEE 802.1D.
+for ordinal in ('01', '02', '03'):
+    n = n.replace(f'<b>{ordinal}</b>', '')
 
 netdes.write_text(n, encoding='utf-8')
-print('Final portfolio identity cleanup applied')
+print('Final multilingual portfolio identity cleanup applied')
