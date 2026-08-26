@@ -1,7 +1,6 @@
 name: Portfolio touch interaction refinement
 
-# Temporary one-shot trigger for the approved mobile touch-feedback pass. The
-# push trigger is limited to the V5 script so generated portfolio commits cannot loop.
+# Temporary one-shot trigger for the approved mobile touch-feedback pass.
 on:
   push:
     paths:
@@ -20,20 +19,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Preserve V3/V4 and apply Touch V5
-        run: |
-          python scripts/finalize_portfolio_identity.py
-          python scripts/refine_portfolio_v3.py
-          python scripts/refine_responsive_v4.py
-          python scripts/refine_touch_v5.py
+      - name: Apply Touch V5 to current Responsive V4 baseline
+        run: python scripts/refine_touch_v5.py
       - name: Commit touch interaction refinement
         run: |
-          if git diff --quiet -- index.html projects/netdes/index.html; then
+          if git diff --quiet -- index.html; then
             echo "Touch feedback already current"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html projects/netdes/index.html
+          git add index.html
           git commit -m "Apply mobile touch interaction V5"
           git push
