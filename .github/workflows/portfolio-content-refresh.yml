@@ -1,8 +1,11 @@
-name: Portfolio identity maintenance
+name: Portfolio touch interaction refinement
 
-# Manual-only safety workflow. Normal content edits must not trigger a full
-# rebuild. This preserves the approved V3 identity and Responsive V4 behavior.
+# Temporary one-shot trigger for the approved mobile touch-feedback pass. The
+# push trigger is limited to the V5 script so generated portfolio commits cannot loop.
 on:
+  push:
+    paths:
+      - 'scripts/refine_touch_v5.py'
   workflow_dispatch:
 
 permissions:
@@ -13,23 +16,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  maintain:
+  refine:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Maintain portfolio V3 + Responsive V4
+      - name: Preserve V3/V4 and apply Touch V5
         run: |
           python scripts/finalize_portfolio_identity.py
           python scripts/refine_portfolio_v3.py
           python scripts/refine_responsive_v4.py
-      - name: Commit intentional maintenance update
+          python scripts/refine_touch_v5.py
+      - name: Commit touch interaction refinement
         run: |
           if git diff --quiet -- index.html projects/netdes/index.html; then
-            echo "Portfolio identity already current"
+            echo "Touch feedback already current"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html projects/netdes/index.html
-          git commit -m "Maintain portfolio V3 and Responsive V4"
+          git commit -m "Apply mobile touch interaction V5"
           git push
