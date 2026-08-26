@@ -1,8 +1,7 @@
 name: Resume preview sync
 
-# Manual-only maintenance. Rebuild the resume preview, then immediately reapply
-# the approved V3 identity, Responsive V4 behavior, and Touch V5 feedback so
-# resume work cannot restore older styling or desktop-only interactions.
+# Manual-only maintenance. Rebuild the resume preview, then preserve the current
+# responsive/touch generation. Do not replay the older V3 migration refiner.
 on:
   workflow_dispatch:
 
@@ -18,11 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Sync resume and preserve portfolio V3 + V4 + V5
+      - name: Sync resume and preserve Responsive V4 + Touch V5
         run: |
           python scripts/sync_resume_preview.py
           python scripts/finalize_portfolio_identity.py
-          python scripts/refine_portfolio_v3.py
           python scripts/refine_responsive_v4.py
           python scripts/refine_touch_v5.py
       - name: Commit resume preview
@@ -34,5 +32,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html projects/netdes/index.html
-          git commit -m "Sync resume with portfolio V3/V4/V5"
+          git commit -m "Sync resume with responsive touch portfolio"
           git push
