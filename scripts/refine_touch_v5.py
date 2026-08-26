@@ -1,5 +1,6 @@
 from pathlib import Path
 
+# Touch V5 is intentionally applied only after Responsive V4 exists.
 path = Path("index.html")
 s = path.read_text(encoding="utf-8")
 
