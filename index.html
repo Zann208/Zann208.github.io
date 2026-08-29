@@ -176,9 +176,9 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
   .lang{margin-left:.1rem;padding-left:.3rem}.lang button{padding:.38rem .34rem}
   .tog{width:38px;height:38px;margin-left:.1rem}
   .contact{padding:2.25rem 0}
-  .resume-backdrop{padding:.5rem}.resume-shell{max-height:calc(100dvh - 1rem);overflow:auto;border-radius:5px}
-  .resume-toolbar{gap:.5rem;padding:.65rem .7rem}.resume-action{min-height:40px}.resume-action .action-word{display:none}
-  .resume-stage{padding:.45rem}
+  .resume-backdrop{padding:.5rem;overflow:hidden}.resume-shell{height:calc(100dvh - 1rem);max-height:none;overflow:hidden;border-radius:5px;display:flex;flex-direction:column}
+  .resume-toolbar{flex:0 0 auto;gap:.5rem;padding:.65rem .7rem}.resume-action{min-height:40px}.resume-action .action-word{display:none}
+  .resume-stage{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:.45rem}
 }
 @media (max-width:620px){
   .now{grid-template-columns:1fr;gap:.8rem}
