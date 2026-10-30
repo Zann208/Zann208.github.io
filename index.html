@@ -342,9 +342,35 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 .resume-toolbar{border-bottom-color:rgba(179,77,86,.35)!important}
 @media print{body.resume-printing .resume-paper .resume-rule{background:#7a242c!important}body.resume-printing .resume-paper .resume-sec h3,body.resume-printing .resume-paper a,body.resume-printing .resume-paper .resume-cred-label{color:#7a242c!important}}
 /* /RESUME_ACCENT_V2 */
+
+/* STUDY_FIELD_V1: the Study Console hub's gradient field and film grain, with a pointer light.
+   Fixed behind the page, transform-only animation, still under reduced motion. */
+:root{--glow-1:#7a242c;--glow-2:#3b3638;--glow-3:#262224;--field-a:.32;--field-b:.38;--field-c:.26}
+[data-theme="light"]{--glow-1:#a8424d;--glow-2:#a39d97;--glow-3:#c9c4be;--field-a:.44;--field-b:.55;--field-c:.42}
+.pf-field{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;animation:pf-field-in 1.4s cubic-bezier(.2,.7,.2,1) both}
+.pf-field i{position:absolute;width:62vmax;height:62vmax;border-radius:50%;will-change:transform}
+.pf-field-a{top:-26vmax;left:-12vmax;opacity:var(--field-a);background:radial-gradient(closest-side,var(--glow-1),transparent);animation:pf-drift-a 34s ease-in-out infinite alternate}
+.pf-field-b{top:-18vmax;right:-22vmax;opacity:var(--field-b);background:radial-gradient(closest-side,var(--glow-2),transparent);animation:pf-drift-b 41s ease-in-out infinite alternate}
+.pf-field-c{bottom:-34vmax;left:22%;opacity:var(--field-c);background:radial-gradient(closest-side,var(--glow-3),transparent);animation:pf-drift-c 47s ease-in-out infinite alternate}
+.pf-field::before{content:"";position:absolute;inset:0;z-index:1;opacity:.34;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px 180px}
+[data-theme="light"] .pf-field::before{mix-blend-mode:overlay}
+.pf-field::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 0%,transparent 35%,color-mix(in srgb,var(--bg) 70%,transparent) 75%,var(--bg) 100%)}
+.pf-spot{position:absolute;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--glow-1) 45%,transparent),transparent);opacity:0;transition:opacity .6s cubic-bezier(.2,.7,.2,1);will-change:transform}
+[data-theme="light"] .pf-spot{background:radial-gradient(closest-side,color-mix(in srgb,var(--glow-1) 30%,transparent),transparent)}
+.pf-spot.is-on{opacity:.7}
+@keyframes pf-field-in{from{opacity:0}}
+@keyframes pf-drift-a{to{transform:translate3d(14vmax,8vmax,0) scale(1.12)}}
+@keyframes pf-drift-b{to{transform:translate3d(-12vmax,12vmax,0) scale(.9)}}
+@keyframes pf-drift-c{to{transform:translate3d(-10vmax,-10vmax,0) scale(1.15)}}
+@media(prefers-reduced-motion:reduce){.pf-field,.pf-field i{animation:none}}
+@media print{.pf-field{display:none}}
 </style>
 </head>
 <body>
+<div class="pf-field" aria-hidden="true"><i class="pf-field-a"></i><i class="pf-field-b"></i><i class="pf-field-c"></i></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <nav>
@@ -1047,5 +1073,20 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 })();
 </script>
 
+<script>
+/* Pointer light inside the background field: mouse and trackpad only, never with reduced motion. */
+(function(){
+  if(!window.matchMedia||!matchMedia('(hover: hover) and (pointer: fine)').matches||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var field=document.querySelector('.pf-field');if(!field)return;
+  var spot=document.createElement('span');spot.className='pf-spot';field.appendChild(spot);
+  var last=null,frame=null;
+  window.addEventListener('pointermove',function(e){
+    if(e.pointerType&&e.pointerType!=='mouse'&&e.pointerType!=='pen')return;
+    last=e;if(frame)return;
+    frame=requestAnimationFrame(function(){frame=null;spot.style.transform='translate3d('+last.clientX+'px,'+last.clientY+'px,0)';spot.classList.add('is-on')});
+  },{passive:true});
+  document.documentElement.addEventListener('pointerleave',function(){spot.classList.remove('is-on')});
+})();
+</script>
 </body>
 </html>
