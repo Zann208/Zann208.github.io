@@ -401,9 +401,32 @@ section{padding:clamp(2.75rem,5vw,4rem) 0}
 .pil::after{display:none}
 /* featured projects with a visual */
 .proj.feat{grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:clamp(1.5rem,3.5vw,2.75rem);align-items:center}
-.shot{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--glass-line);background:var(--glass);
-  box-shadow:inset 0 1px 0 var(--glass-edge),var(--glass-shadow);aspect-ratio:16/10.3;transition:transform .3s var(--ease),border-color .25s,box-shadow .3s}
-.shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.proj.feat{grid-template-columns:minmax(0,1fr) 300px}
+.thumb{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;aspect-ratio:16/9.6;padding:1rem 1rem 2.4rem;
+  border-radius:14px;overflow:hidden;color:var(--text);background:var(--glass);border:1px solid var(--glass-line);cursor:pointer;
+  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:inset 0 1px 0 var(--glass-edge),var(--glass-shadow);transition:transform .3s var(--ease),border-color .25s,box-shadow .3s}
+.thumb-title{font:650 .86rem var(--sans);letter-spacing:-.005em;color:var(--text)}
+.thumb-logos{display:flex;align-items:center;justify-content:center;gap:.8rem}
+.thumb-logos img{display:block;width:auto;height:38px}
+.thumb-logos .dots{height:38px}.thumb-logos .edu{height:46px}
+.thumb-logos img+img{padding-left:.8rem;border-left:1px solid var(--line-strong)}
+:root:not([data-theme="light"]) .thumb .ink{filter:invert(1) brightness(.92)}
+.thumb.sc{padding:1.1rem 1.4rem 2.6rem;background:#382b2d}
+.thumb.sc .sc-img{display:block;width:100%;height:100%;min-height:0;object-fit:contain;transition:transform .4s var(--ease);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,transparent,#000 10%,#000 90%,transparent);mask-composite:intersect}
+.thumb.sc .thumb-cta{background:rgba(22,15,16,.55);color:#e58a93;border-color:rgba(229,138,147,.45)}
+.thumb-cta{position:absolute;right:.7rem;bottom:.7rem;z-index:1;display:inline-flex;align-items:center;gap:.3rem;font:600 .62rem var(--mono);letter-spacing:.07em;text-transform:uppercase;
+  padding:.32rem .6rem;border-radius:999px;color:var(--accent);background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:background .2s,color .2s,border-color .2s}
+.thumb-cta .ar{transition:transform .2s}
+.thumb:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){
+  .thumb:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 45%,var(--glass-line));box-shadow:inset 0 1px 0 var(--glass-edge),0 16px 40px rgba(0,0,0,.28)}
+  .thumb:hover .thumb-cta{background:var(--accent-strong);border-color:var(--accent-strong);color:#fff}
+  .thumb:hover .thumb-cta .ar{transform:translate(2px,-2px)}
+  .thumb.sc:hover .sc-img{transform:scale(1.03)}
+}
+.thumb:active .thumb-cta{background:var(--accent-strong);color:#fff}
 /* other projects as compact glass cards */
 .others-h{font:600 .76rem var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2.6rem 0 .9rem;display:flex;align-items:center;gap:.8rem}
 .others-h::after{content:"";height:1px;flex:1;background:var(--line)}
@@ -422,13 +445,12 @@ section{padding:clamp(2.75rem,5vw,4rem) 0}
 @media (hover:hover) and (pointer:fine){
   .pil:hover,.proj.mini:hover{background:var(--glass-hi);border-color:color-mix(in srgb,var(--accent) 38%,var(--glass-line))!important;transform:translateY(-2px)}
   .proj.mini:hover{padding-left:1.25rem}
-  .shot:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 38%,var(--glass-line));box-shadow:inset 0 1px 0 var(--glass-edge),0 16px 40px rgba(0,0,0,.28)}
   .proj.feat:hover{background:transparent;padding-left:0}
 }
 .proj.feat:active{background:transparent}
-@media (max-width:900px){.minis{grid-template-columns:minmax(0,1fr)}.proj.feat{grid-template-columns:minmax(0,1fr)}.shot{order:-1}}
-@media (prefers-reduced-motion:reduce){.pil:hover,.proj.mini:hover,.shot:hover{transform:none}}
-@media print{.pil,.proj.mini,.shot{background:none;box-shadow:none;backdrop-filter:none}}
+@media (max-width:900px){.minis{grid-template-columns:minmax(0,1fr)}.proj.feat{grid-template-columns:minmax(0,1fr)}.thumb{order:-1;width:min(100%,340px)}}
+@media (prefers-reduced-motion:reduce){.pil:hover,.proj.mini:hover,.thumb:hover{transform:none}}
+@media print{.pil,.proj.mini,.thumb{background:none;box-shadow:none;backdrop-filter:none}}
 </style>
 </head>
 <body>
@@ -576,7 +598,15 @@ section{padding:clamp(2.75rem,5vw,4rem) 0}
         </div>
         <div class="tags"><span class="tag">Campus LAN</span><span class="tag">VLAN / IP plan</span><span class="tag">LACP · Rapid-PVST+</span><span class="tag">HSRP</span><span class="tag">Wi-Fi 6</span><span class="tag">Python · Jinja2</span><span class="tag">Packet Tracer</span></div>
       </div>
-      <a class="shot" href="https://zann208.github.io/NETDES-EB1-EB2-Campus-Design/" target="_blank" rel="noopener" aria-label="Open the EB1-EB2 project console"><img src="projects/eb1-eb2/topology.webp" width="1200" height="772" loading="lazy" alt="EB1-EB2 physical topology: FortiGate HA pair, stacked cores in each building, distribution and access stacks with fibre and copper links"></a>
+      <a class="thumb" href="https://zann208.github.io/NETDES-EB1-EB2-Campus-Design/" target="_blank" rel="noopener" aria-label="Open the EB1-EB2 project console">
+      <span class="thumb-title">EB1-EB2 Campus Network</span>
+      <span class="thumb-logos">
+        <img class="ink" src="projects/eb1-eb2/logo-isne.png" width="440" height="187" alt="ISNE, Chiang Mai University">
+        <img class="dots" src="projects/eb1-eb2/logo-dots.webp" width="240" height="229" alt="">
+        <img class="ink edu" src="projects/eb1-eb2/logo-edu.png" width="300" height="239" alt="Faculty of Education, Chiang Mai University">
+      </span>
+      <span class="thumb-cta" data-i="lnLive">Open console <span class="ar">↗</span></span>
+    </a>
     </article>
 
     <article class="proj feat">
@@ -590,7 +620,10 @@ section{padding:clamp(2.75rem,5vw,4rem) 0}
         </div>
         <div class="tags"><span class="tag">Design system</span><span class="tag">STP solver</span><span class="tag">RF planning</span><span class="tag">Vanilla JS</span><span class="tag">GitHub Pages</span></div>
       </div>
-      <a class="shot" href="https://zann208.github.io/study/" target="_blank" rel="noopener" aria-label="Open Study Console"><img src="projects/study/console.webp" width="1200" height="750" loading="lazy" alt="Study Console overview with the console menu and cards for network design, wireless and algorithms"></a>
+      <a class="thumb sc" href="https://zann208.github.io/study/" target="_blank" rel="noopener" aria-label="Open Study Console">
+      <img class="sc-img" src="projects/study/thumb.webp" width="916" height="494" alt="ISNE Study Console">
+      <span class="thumb-cta" data-i="lnLive">Open console <span class="ar">↗</span></span>
+    </a>
     </article>
 
   </div>
