@@ -388,6 +388,47 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 @media (prefers-reduced-motion:reduce){.cert:hover,.lnk:hover{transform:none}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.cert,.lnk{background:color-mix(in srgb,var(--surface) 82%,transparent)}}
 @media print{.cert,.lnk{background:none;box-shadow:none;backdrop-filter:none}}
+/* LAYOUT_V5: one card language (glass cards, open-row lists), project visuals, tighter rhythm. */
+section{padding:clamp(2.75rem,5vw,4rem) 0}
+.role::after{display:none}
+.now a{color:var(--text);border-bottom:1px solid var(--line-strong)}
+.now a:hover{color:var(--accent);border-color:var(--accent)}
+/* focus pillars join the glass system */
+.pillars{gap:.75rem;background:transparent;border:0}
+.pil{background:var(--glass);border:1px solid var(--glass-line);border-radius:14px;
+  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:inset 0 1px 0 var(--glass-edge),var(--glass-shadow);transition:background .25s,border-color .25s,transform .25s var(--ease)}
+.pil::after{display:none}
+/* featured projects with a visual */
+.proj.feat{grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:clamp(1.5rem,3.5vw,2.75rem);align-items:center}
+.shot{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--glass-line);background:var(--glass);
+  box-shadow:inset 0 1px 0 var(--glass-edge),var(--glass-shadow);aspect-ratio:16/10.3;transition:transform .3s var(--ease),border-color .25s,box-shadow .3s}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+/* other projects as compact glass cards */
+.others-h{font:600 .76rem var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:2.6rem 0 .9rem;display:flex;align-items:center;gap:.8rem}
+.others-h::after{content:"";height:1px;flex:1;background:var(--line)}
+.minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.proj.mini{border:1px solid var(--glass-line)!important;border-radius:14px;padding:1.2rem 1.25rem;background:var(--glass);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:inset 0 1px 0 var(--glass-edge),var(--glass-shadow);transition:background .25s,border-color .25s,transform .25s var(--ease)}
+.proj.mini .proj-top h3{font-size:1rem}.proj.mini p{font-size:.84rem;line-height:1.6}.proj.mini .plinks{gap:.8rem}.proj.mini .plinks a{font-size:.76rem}
+/* credentials */
+.certs.one{grid-template-columns:minmax(0,1fr)}
+.clist{list-style:none;margin:.35rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.2rem .9rem;font-size:.82rem;color:var(--muted)}
+.clist li+li::before{content:"·";margin-right:.9rem;color:var(--quiet)}
+/* contact + links as one closing section */
+#contact .contact{border-bottom:0;padding-bottom:1.6rem}
+#contact .links{margin-top:.4rem}
+@media (hover:hover) and (pointer:fine){
+  .pil:hover,.proj.mini:hover{background:var(--glass-hi);border-color:color-mix(in srgb,var(--accent) 38%,var(--glass-line))!important;transform:translateY(-2px)}
+  .proj.mini:hover{padding-left:1.25rem}
+  .shot:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 38%,var(--glass-line));box-shadow:inset 0 1px 0 var(--glass-edge),0 16px 40px rgba(0,0,0,.28)}
+  .proj.feat:hover{background:transparent;padding-left:0}
+}
+.proj.feat:active{background:transparent}
+@media (max-width:900px){.minis{grid-template-columns:minmax(0,1fr)}.proj.feat{grid-template-columns:minmax(0,1fr)}.shot{order:-1}}
+@media (prefers-reduced-motion:reduce){.pil:hover,.proj.mini:hover,.shot:hover{transform:none}}
+@media print{.pil,.proj.mini,.shot{background:none;box-shadow:none;backdrop-filter:none}}
 </style>
 </head>
 <body>
@@ -403,7 +444,6 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
       <a href="#work" data-sc>work</a>
       <a href="#experience" data-sc>experience</a>
       <a href="#stack" data-sc>skills</a>
-      <a href="#connect" data-sc>connect</a>
       <a href="#contact" class="keep" data-sc>contact</a>
       <button class="resume-nav-btn keep" id="resumeOpen" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="resumePortal" title="Preview resume">
         <span class="resume-word">resume</span>
@@ -447,8 +487,8 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
       </button>
     </div>
     <div class="now">
-      <div><b data-i="n2">focus</b><em data-i="n2v">Network engineering · infrastructure · security</em></div>
-      <div><b data-i="n3">graduating</b><em>2028</em></div>
+      <div><b data-i="n3">lead project</b><em><a href="#work" data-i="n3v">EB1-EB2 campus network · 722 users · 14 VLANs</a></em></div>
+      <div><b data-i="n2">currently</b><em data-i="n2v">Preparing for Cisco CCNA</em></div>
     </div>
   </div>
 
@@ -487,7 +527,6 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
     </div>
     <aside class="card facts">
       <dl>
-        <dt data-i="f1">education</dt><dd data-i="f1v">Studying Information Systems and Network Engineering<br>Chiang Mai University</dd>
         <dt data-i="f2">faculty</dt><dd data-i="f2v">Faculty of Engineering</dd>
         <dt data-i="f3">graduating</dt><dd>2028</dd>
         <dt data-i="f4">based in</dt><dd data-i="f4v">Chiang Mai, Thailand</dd>
@@ -526,7 +565,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
   <p class="sub" data-i="wsub">Selected work, led by networking and infrastructure projects.</p>
   <div class="projects">
 
-    <article class="proj">
+    <article class="proj feat">
       <div>
         <div class="proj-top"><h3>EB1-EB2 Campus Network Design</h3><span class="badge-s live" data-i="stTeam">team project</span></div>
         <p data-i="wEB">A campus network for two academic buildings with 722 peak users and 1,668 devices: three tiers with a core in each building, a FortiGate HA pair as the only Layer 3 point, 14 VLANs and 57 Wi-Fi 6 APs. I led the site survey, design and architecture, then rebuilt the project as code: a YAML source of truth, a 143-check validator in GitHub Actions, and a Packet Tracer lab whose Cisco IOS configs are rendered from the design.</p>
@@ -537,9 +576,10 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
         </div>
         <div class="tags"><span class="tag">Campus LAN</span><span class="tag">VLAN / IP plan</span><span class="tag">LACP · Rapid-PVST+</span><span class="tag">HSRP</span><span class="tag">Wi-Fi 6</span><span class="tag">Python · Jinja2</span><span class="tag">Packet Tracer</span></div>
       </div>
+      <a class="shot" href="https://zann208.github.io/NETDES-EB1-EB2-Campus-Design/" target="_blank" rel="noopener" aria-label="Open the EB1-EB2 project console"><img src="projects/eb1-eb2/topology.webp" width="1200" height="772" loading="lazy" alt="EB1-EB2 physical topology: FortiGate HA pair, stacked cores in each building, distribution and access stacks with fibre and copper links"></a>
     </article>
 
-    <article class="proj">
+    <article class="proj feat">
       <div>
         <div class="proj-top"><h3>Study Console</h3><span class="badge-s live" data-i="stLive">live</span></div>
         <p data-i="wSC">A hub of six browser-based technical consoles I build and maintain: network design, wireless engineering, algorithms, privacy and security, operating systems and data centre hardware. Every console runs on one shared interface shell drawn from a small manifest, with search, progress, themes, English and Burmese, and a versioned rollback, in plain HTML, CSS and JavaScript on GitHub Pages. The network console includes an IEEE 802.1D solver that works out the root bridge, port roles and blocked ports from an entered topology.</p>
@@ -550,9 +590,13 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
         </div>
         <div class="tags"><span class="tag">Design system</span><span class="tag">STP solver</span><span class="tag">RF planning</span><span class="tag">Vanilla JS</span><span class="tag">GitHub Pages</span></div>
       </div>
+      <a class="shot" href="https://zann208.github.io/study/" target="_blank" rel="noopener" aria-label="Open Study Console"><img src="projects/study/console.webp" width="1200" height="750" loading="lazy" alt="Study Console overview with the console menu and cards for network design, wireless and algorithms"></a>
     </article>
 
-    <article class="proj">
+  </div>
+  <h3 class="others-h" data-i="othH">Other projects</h3>
+  <div class="minis">
+    <article class="proj mini">
       <div>
         <div class="proj-top"><h3>Culprit!</h3><span class="badge-s live" data-i="stTeam">team project</span></div>
         <p data-i="wCulprit">A customer-facing Software Engineering project for Chiang Mai University. As Documentation Lead, I manage the SRS, requirements traceability, sprint records, meeting minutes, decision records and test documentation, keeping the project record aligned with the deployed system.</p>
@@ -565,7 +609,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
       </div>
     </article>
 
-    <article class="proj">
+    <article class="proj mini">
       <div>
         <div class="proj-top"><h3>PawSnap</h3><span class="badge-s live" data-i="stTeam">team project</span></div>
         <p data-i="wPaw">A pet social platform built by a team of three. I authored backend and data-layer work including Firebase Cloud Functions, Firestore security rules, authentication support, notification and counter logic, and service APIs used by the front end.</p>
@@ -577,7 +621,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
       </div>
     </article>
 
-    <article class="proj">
+    <article class="proj mini">
       <div>
         <div class="proj-top"><h3>Pavovival</h3><span class="badge-s live" data-i="stTeam">team project</span></div>
         <p data-i="w3d">A 2D side-scrolling survival shooter built with Java and libGDX as a GroupSix Object-Oriented Programming final project. I contributed within a shared team architecture, strengthening my experience with object-oriented design, collaboration and working in an established codebase.</p>
@@ -662,14 +706,11 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
   <div class="shead"><h2 data-sc>credentials</h2><span class="rule"></span></div>
   <div class="cred-groups">
 
-    <div class="cred-group">
-      <div class="cred-group-head"><h3 data-i="cgCisco">Cisco Networking Academy</h3></div>
+    <div class="cred-group path">
+      <div class="cred-group-head"><h3 data-i="cgPath">In progress</h3></div>
       <div class="certs">
-        <div class="cert done course"><span class="mk" aria-hidden="true">✓</span><div><h4>Networking Basics</h4><span data-i="cAcad">Cisco Networking Academy</span></div></div>
-        <div class="cert done course"><span class="mk" aria-hidden="true">✓</span><div><h4>Exploring Networking with Cisco Packet Tracer</h4><span data-i="cAcad">Cisco Networking Academy</span></div></div>
-        <div class="cert done course"><span class="mk" aria-hidden="true">✓</span><div><h4>Introduction to Cybersecurity</h4><span data-i="cAcad">Cisco Networking Academy</span></div></div>
-        <div class="cert done course"><span class="mk" aria-hidden="true">✓</span><div><h4>Ethical Hacker</h4><span data-i="cAcad">Cisco Networking Academy</span></div></div>
-        <div class="cert done course"><span class="mk" aria-hidden="true">✓</span><div><h4>Introduction to Modern AI</h4><span data-i="cAcad">Cisco Networking Academy</span></div></div>
+        <div class="cert prog"><span class="mk" aria-hidden="true">…</span><div><h4>Cisco CCNA</h4><span data-i="cProg">in progress</span></div></div>
+        <div class="cert prog"><span class="mk" aria-hidden="true">…</span><div><h4>Google Cybersecurity Certificate</h4><span data-i="cProg2">in progress</span></div></div>
       </div>
     </div>
 
@@ -681,11 +722,10 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
       </div>
     </div>
 
-    <div class="cred-group path">
-      <div class="cred-group-head"><h3 data-i="cgPath">In progress</h3></div>
-      <div class="certs">
-        <div class="cert prog"><span class="mk" aria-hidden="true">…</span><div><h4>Cisco CCNA</h4><span data-i="cProg">in progress</span></div></div>
-        <div class="cert prog"><span class="mk" aria-hidden="true">…</span><div><h4>Google Cybersecurity Certificate</h4><span data-i="cProg2">in progress</span></div></div>
+    <div class="cred-group">
+      <div class="cred-group-head"><h3 data-i="cgCisco">Cisco Networking Academy</h3></div>
+      <div class="certs one">
+        <div class="cert done course"><span class="mk" aria-hidden="true">✓</span><div><h4 data-i="cAcadN">5 courses completed</h4><ul class="clist"><li>Networking Basics</li><li>Exploring Networking with Cisco Packet Tracer</li><li>Introduction to Cybersecurity</li><li>Ethical Hacker</li><li>Introduction to Modern AI</li></ul></div></div>
       </div>
     </div>
 
@@ -699,9 +739,21 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
   </div>
 </section>
 
-<!-- ═══ CONNECT ═══ -->
-<section id="connect" class="wrap rev">
-  <div class="shead"><h2 data-sc>connect</h2><span class="rule"></span></div>
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="wrap rev">
+  <div class="contact">
+    <h2 data-i="ct">Let's talk</h2>
+    <p data-i="cd">Open to internships and junior roles in network and security engineering. Based in Chiang Mai, and open to remote work.</p>
+    <div class="soc">
+      <button class="btn pri" id="copy" type="button" data-i="copy">Copy email</button>
+      <a class="btn" href="mailto:thuhtoozan_1@cmu.ac.th">Email <span class="ar">↗</span></a>
+            <button class="btn resume-hero-btn" id="resumeContact" type="button" aria-haspopup="dialog" aria-controls="resumePortal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:15px;height:15px"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h5M10 17h5"/></svg>
+        Resume
+      </button>
+    </div>
+    <div id="copied" role="status" aria-live="polite"></div>
+  </div>
   <div class="links">
     <a class="lnk" href="https://www.linkedin.com/in/thu-htoo-zan-8866ab377/" target="_blank" rel="noopener">
       <span class="lnk-top">
@@ -721,24 +773,6 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
       <p class="d" data-i="l2">Network labs, technical tools and project source code.</p>
       <span class="st8" data-i="l2s">active repositories</span>
     </a>
-  </div>
-</section>
-
-<!-- ═══ CONTACT ═══ -->
-<section id="contact" class="wrap rev">
-  <div class="contact">
-    <h2 data-i="ct">Let's talk</h2>
-    <p data-i="cd">Open to internships and junior roles in network and security engineering. Based in Chiang Mai, and open to remote work.</p>
-    <div class="soc">
-      <button class="btn pri" id="copy" type="button" data-i="copy">Copy email</button>
-      <a class="btn" href="mailto:thuhtoozan_1@cmu.ac.th">Email <span class="ar">↗</span></a>
-      <a class="btn" href="https://www.linkedin.com/in/thu-htoo-zan-8866ab377/" target="_blank" rel="noopener">LinkedIn <span class="ar">↗</span></a>
-      <button class="btn resume-hero-btn" id="resumeContact" type="button" aria-haspopup="dialog" aria-controls="resumePortal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:15px;height:15px"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h5M10 17h5"/></svg>
-        Resume
-      </button>
-    </div>
-    <div id="copied" role="status" aria-live="polite"></div>
   </div>
 </section>
 </main>
@@ -926,7 +960,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 
 
   /* ── i18n: EN / TH / CN ─────────────────────────── */
-  var I18N = { th: {pill:"เปิดรับการฝึกงาน · 2027",lede:"ผมมุ่งเน้นการออกแบบ ทดสอบ และแก้ปัญหาเครือข่ายและโครงสร้างพื้นฐาน โดยมีประสบการณ์ลงมือทำกับ switching, VLAN segmentation, spanning tree, การวางแผนเครือข่ายไร้สาย การวิเคราะห์ทราฟฟิก และระบบ Linux ปัจจุบันศึกษาวิศวกรรมระบบสารสนเทศและเครือข่ายที่มหาวิทยาลัยเชียงใหม่และกำลังเตรียมสอบ CCNA",cta1:"ดูผลงาน",cta2:"ติดต่อผม",n1:"กำลังเรียน",n2:"ความสนใจ",n2v:"วิศวกรรมเครือข่าย · โครงสร้างพื้นฐาน · ความปลอดภัย",n3:"จบการศึกษา",b1:"ชื่อ",b2:"หลักสูตร",b2v:"วิศวกรรมระบบสารสนเทศและเครือข่าย · มหาวิทยาลัยเชียงใหม่",b3:"ความสนใจ",b4:"เวลาท้องถิ่น",b5:"สถานะ",avail:"ว่างรับงาน",ns:"เครือข่ายและความปลอดภัย",a1:"หลักสูตรของผมสอนเป็นภาษาอังกฤษและเน้นโครงสร้างพื้นฐานเครือข่าย การออกแบบระบบ และความปลอดภัยของข้อมูล สิ่งที่ผมสนใจมากที่สุดคือการเข้าใจว่าเครือข่ายถูกออกแบบอย่างไร ทราฟฟิกเดินทางอย่างไร และจะตรวจสอบได้อย่างไรว่าระบบทำงานตามที่ตั้งใจไว้",a2:"ผมเรียนรู้ผ่านแล็บจริง โดยสร้าง topology ตรวจสอบ configuration วิเคราะห์ทราฟฟิก และแก้ปัญหาจนสามารถอธิบายสาเหตุและวิธีแก้ได้",f1:"การศึกษา",f1v:"กำลังศึกษาวิศวกรรมระบบสารสนเทศและเครือข่าย<br>มหาวิทยาลัยเชียงใหม่",f2:"คณะ",f2v:"คณะวิศวกรรมศาสตร์",f3:"จบการศึกษา",f4:"ที่อยู่",f4v:"เชียงใหม่ ประเทศไทย",seek:"กำลังหา · ฝึกงานด้านเครือข่ายและความปลอดภัย",fsub:"ด้านที่ผมพัฒนาอย่างจริงจังที่สุด",p1t:"เครือข่าย",p1d:"ลงมือทำด้านการออกแบบและแก้ปัญหาเครือข่าย รวมถึง VLAN, routing, switching, subnetting, inter-VLAN routing และการวิเคราะห์ระดับแพ็กเก็ต",p2t:"ความปลอดภัย",p2d:"มุ่งเน้นความปลอดภัยเครือข่ายเชิงปฏิบัติผ่านนโยบายไฟร์วอลล์ segmentation การควบคุมสิทธิ์ และการตรวจสอบทราฟฟิกด้วย Wireshark และ Nmap",p3t:"ระบบและโครงสร้างพื้นฐาน",p3d:"ทำงานกับ Linux และสภาพแวดล้อม virtualized lab เพื่อกำหนดค่า ทดสอบ และสนับสนุนโครงสร้างพื้นฐานอย่างเป็นระบบและทำซ้ำได้",w1t:"ชุดเครื่องมือสำรวจเครือข่าย",w2t:"บันทึกการแก้โจทย์ CTF",stBuild:"กำลังทำ",stPlan:"วางแผนไว้",ssub:"ทักษะเชิงปฏิบัติที่ใช้ในแล็บเครือข่าย การแก้ปัญหา และงานโครงสร้างพื้นฐาน",s1:"เครือข่าย",s2:"ความปลอดภัย",s3:"ระบบ",s4:"การเขียนโปรแกรม",snote:"ความชำนาญแต่ละอย่างไม่เท่ากัน บางอย่างใช้ประจำ บางอย่างยังเรียนรู้อยู่ ยินดีบอกตามตรงว่าอันไหนเป็นอันไหน",cgCisco:"Cisco Networking Academy",cgTraining:"การฝึกอบรมด้านเทคนิค",cgPath:"กำลังเรียน",cgMembership:"สมาชิกวิชาชีพ",cProg:"กำลังเรียน",cAcad:"Cisco Networking Academy",l1:"ประวัติฉบับเต็ม ทั้งการศึกษา ประสบการณ์ และช่องทางติดต่อ",l2:"แล็บเครือข่าย เครื่องมือทางเทคนิค และซอร์สโค้ดของโปรเจกต์",l3:"บันทึกการทำงาน สิ่งที่กำลังทำ สิ่งที่พัง และสิ่งที่แก้ได้",l1s:"ช่องทางหลัก",l2s:"รีโพที่ใช้งานอยู่",l3s:"เริ่มเร็ว ๆ นี้",ct:"คุยกันได้ครับ",cd:"เปิดรับการฝึกงานและตำแหน่งระดับเริ่มต้นด้านวิศวกรรมเครือข่ายและความปลอดภัย อยู่ที่เชียงใหม่ และทำงานทางไกลได้",copy:"คัดลอกอีเมล",wCulprit:"โปรเจกต์วิศวกรรมซอฟต์แวร์แบบทีมสำหรับลูกค้าจริงที่มหาวิทยาลัยเชียงใหม่ ผมรับผิดชอบด้านเอกสาร ดูแล SRS การเชื่อมโยงความต้องการ งานในสปรินต์ บันทึกการประชุม บันทึกการตัดสินใจ และเอกสารการทดสอบให้สอดคล้องกับระบบที่ใช้งานจริง",wPaw:"แพลตฟอร์มโซเชียลสำหรับสัตว์เลี้ยงที่พัฒนาโดยทีมสามคน ผมรับผิดชอบงานแบ็กเอนด์และชั้นข้อมูล รวมถึง Firebase Cloud Functions กฎความปลอดภัยของ Firestore การรองรับการยืนยันตัวตน ระบบแจ้งเตือนและตัวนับ และ service API สำหรับฝั่งหน้าเว็บ",lnCase:"กรณีศึกษาของผม",lnTeamRepo:"รีโพทีม",lnLiveProd:"เว็บไซต์จริง",lnBackend:"ซอร์สแบ็กเอนด์",lnFullRepo:"โปรเจกต์เต็ม",w1d:"คอนโซลด้านการออกแบบและแก้ปัญหาเครือข่าย ครอบคลุม VLAN, 802.1Q trunks, EtherChannel, inter-VLAN routing และ spanning tree พร้อมตัวแก้ IEEE 802.1D ที่คำนวณ root bridge, port roles และ blocked ports จาก topology ที่ป้อนเข้าไป",w2d:"คอนโซลเครือข่ายไร้สายที่ครอบคลุม RF planning, coverage margin และ cell sizing, link budgets, capacity, channel reuse, Wi-Fi security, segmentation และ monitoring เพื่อเชื่อมการคำนวณด้าน wireless design เข้ากับการตัดสินใจด้านเครือข่ายจริง",w3d:"เกมยิงเอาชีวิตรอดแบบเลื่อนด้านข้าง 2 มิติที่สร้างด้วย Java และ libGDX ร่วมกับทีม GroupSix สำหรับโปรเจกต์ปลายภาควิชาการเขียนโปรแกรมเชิงวัตถุ ผมได้พัฒนาประสบการณ์ด้านการออกแบบเชิงวัตถุ การทำงานร่วมกัน และการพัฒนาในโค้ดเบสที่ใช้สถาปัตยกรรมร่วมกัน",wsub:"ผลงานที่คัดเลือก โดยให้ความสำคัญกับเครือข่ายและโครงสร้างพื้นฐานเป็นหลัก",stLive:"ใช้งานได้",stLive2:"ใช้งานได้",stTeam:"โปรเจกต์กลุ่ม",lnLive:"เปิดคอนโซล",lnAll:"ดูทั้งหมด",lnSrc:"ซอร์สโค้ด",lnSrc2:"ซอร์สโค้ด",lnSrc3:"ซอร์สโค้ด",xTo:"ถึง",xTo2:"ถึง",xTo3:"ถึง",xTo4:"ถึง",xTo5:"ถึง",xNow:"ปัจจุบัน",xNow2:"ปัจจุบัน",xPart:"งานพาร์ทไทม์",xPart2:"งานพาร์ทไทม์",xFull:"งานประจำ",xFree:"ฟรีแลนซ์",xFound:"ผู้ก่อตั้ง",x1d:"ทดสอบซอฟต์แวร์ บันทึกปัญหาด้านฟังก์ชันและ UX ส่งผลการทดสอบให้ทีมที่รับผิดชอบ และติดตามการแก้ไขจนเสร็จ",x2o:"ทำเอง",x2d:"แบรนด์ส่วนตัวที่เผยแพร่เนื้อหาและสื่อการเรียนรู้ด้านเทคโนโลยี พร้อมกับ ZannBot บอทที่สร้างขึ้นมาเพื่อสนับสนุนงานนี้",kNet:"วิทยาลัย KMD ย่างกุ้ง · 54 ชั่วโมง",kApl:"วิทยาลัย KMD ย่างกุ้ง · 40 ชั่วโมง",cProg2:"กำลังเรียน",mIEEE:"สถาบันวิศวกรไฟฟ้าและอิเล็กทรอนิกส์ (IEEE) · สมาชิกนักศึกษา · 2026–ปัจจุบัน",wEB:"เครือข่ายแคมปัสสำหรับอาคารเรียน 2 หลัง รองรับผู้ใช้พร้อมกัน 722 คนและอุปกรณ์ 1,668 เครื่อง ออกแบบแบบ 3 ชั้นโดยมี core ในแต่ละอาคาร ใช้ FortiGate HA เป็นจุด Layer 3 เพียงจุดเดียว มี 14 VLAN และ Wi-Fi 6 AP 57 ตัว ผมรับผิดชอบการสำรวจพื้นที่ การออกแบบ และสถาปัตยกรรม จากนั้นสร้างโปรเจกต์ใหม่ในรูปแบบโค้ด ได้แก่ ไฟล์ YAML เป็นแหล่งข้อมูลหลัก ตัวตรวจสอบ 143 รายการบน GitHub Actions และแล็บจำลองใน Packet Tracer ที่สร้าง config ของ Cisco IOS จากไฟล์ออกแบบโดยอัตโนมัติ",lnInNetdes:"ใน NETDES",wSC:"ศูนย์รวมคอนโซลด้านเทคนิค 6 ตัวที่ทำงานบนเบราว์เซอร์ ซึ่งผมสร้างและดูแลเอง ได้แก่ การออกแบบเครือข่าย วิศวกรรมเครือข่ายไร้สาย อัลกอริทึม ความเป็นส่วนตัวและความปลอดภัย ระบบปฏิบัติการ และฮาร์ดแวร์ศูนย์ข้อมูล ทุกคอนโซลใช้ shell อินเทอร์เฟซร่วมกันที่สร้างจาก manifest ขนาดเล็ก มีระบบค้นหา ความคืบหน้า ธีม ภาษาอังกฤษและพม่า และการย้อนกลับเวอร์ชัน เขียนด้วย HTML, CSS และ JavaScript ล้วนบน GitHub Pages คอนโซลเครือข่ายมีตัวแก้ IEEE 802.1D ที่คำนวณ root bridge, port roles และ blocked ports จาก topology ที่ป้อนเข้าไป",lnNetCase:"กรณีศึกษา NETDES"}, zh: {pill:"接受实习机会 · 2027",lede:"我专注于网络与基础设施的设计、测试和故障排除，并通过交换、VLAN 分段、生成树、无线规划、流量分析和 Linux 系统进行实践。目前就读于清迈大学信息系统与网络工程专业，并正在准备 CCNA。",cta1:"查看项目",cta2:"联系我",n1:"在学",n2:"方向",n2v:"网络工程 · 基础设施 · 安全",n3:"毕业年份",b1:"姓名",b2:"专业",b2v:"信息系统与网络工程 · 清迈大学",b3:"方向",b4:"当地时间",b5:"状态",avail:"可接洽",ns:"网络与安全",a1:"我的课程以英语授课，重点涵盖网络基础设施、系统设计和信息安全。我最关注的是理解网络如何设计、流量如何传输，以及如何验证系统是否按预期运行。",a2:"我通过实践实验学习：搭建拓扑、验证配置、分析流量并排查故障，直到能够解释问题的原因和解决方法。",f1:"学历",f1v:"就读信息系统与网络工程<br>清迈大学",f2:"学院",f2v:"工程学院",f3:"毕业",f4:"所在地",f4v:"泰国清迈",seek:"求职方向 · 网络与安全实习",fsub:"我最有意识持续发展的领域",p1t:"网络",p1d:"实践网络设计与故障排除，包括 VLAN、路由、交换、子网划分、VLAN 间路由和数据包级分析。",p2t:"安全",p2d:"专注于实用网络安全，包括防火墙策略、分段、访问控制，以及使用 Wireshark 和 Nmap 进行流量检查。",p3t:"系统与基础设施",p3d:"使用 Linux 和虚拟化实验环境，以可重复的方式配置、测试和支持基础设施。",w1t:"网络侦察工具",w2t:"CTF 解题记录",stBuild:"进行中",stPlan:"计划中",ssub:"用于网络实验、故障排除和基础设施工作的实用技能。",s1:"网络",s2:"安全",s3:"系统",s4:"编程",snote:"各项掌握程度并不相同，有些经常使用，有些仍在学习。我很乐意如实说明哪些是哪些。",cgCisco:"Cisco Networking Academy",cgTraining:"技术培训",cgPath:"进行中",cgMembership:"专业会员",cProg:"进行中",cAcad:"Cisco 网络学院",l1:"完整的履历：学历、经历与联系方式。",l2:"网络实验、技术工具和项目源代码。",l3:"构建日志：正在做什么、哪里出了问题、以及如何解决。",l1s:"主要联系方式",l2s:"活跃仓库",l3s:"即将开始",ct:"欢迎联系",cd:"接受网络与安全工程方向的实习及初级职位。常驻清迈，也可远程。",copy:"复制邮箱",wCulprit:"面向清迈大学真实客户的软件工程团队项目。我担任文档负责人，负责 SRS、需求追踪、Sprint 记录、会议纪要、决策记录与测试文档，并确保项目记录与实际部署系统保持一致。",wPaw:"三人团队开发的宠物社交平台。我负责后端与数据层工作，包括 Firebase Cloud Functions、Firestore 安全规则、认证支持、通知与计数逻辑以及前端调用的服务 API。",lnCase:"我的案例",lnTeamRepo:"团队仓库",lnLiveProd:"在线产品",lnBackend:"后端源码",lnFullRepo:"完整项目",w1d:"围绕 VLAN、802.1Q Trunk、EtherChannel、VLAN 间路由和生成树构建的网络设计与故障排除控制台，并包含 IEEE 802.1D 求解器，可根据输入拓扑确定根桥、端口角色和阻塞端口。",w2d:"无线网络控制台，涵盖 RF 规划、覆盖裕量与小区规模、链路预算、容量、信道复用、Wi-Fi 安全、分段和监控，将无线设计计算与实际网络决策连接起来。",w3d:"使用 Java 与 libGDX 构建的 2D 横版生存射击游戏，与 GroupSix 团队共同完成，作为面向对象程序设计课程的期末项目。这个项目让我积累了面向对象设计、团队协作以及在共享架构代码库中开发的经验。",wsub:"精选项目，以网络和基础设施工作为主。",stLive:"已上线",stLive2:"已上线",stTeam:"团队项目",lnLive:"打开控制台",lnAll:"查看全部",lnSrc:"源代码",lnSrc2:"源代码",lnSrc3:"源代码",xTo:"至",xTo2:"至",xTo3:"至",xTo4:"至",xTo5:"至",xNow:"至今",xNow2:"至今",xPart:"兼职",xPart2:"兼职",xFull:"全职",xFree:"自由职业",xFound:"创办者",x1d:"测试软件，记录功能和 UX 问题，将结果提交给负责团队，并跟进修复直至问题解决。",x2o:"独立运营",x2d:"发布技术内容与教育材料的个人品牌，以及为此构建的机器人 ZannBot。",kNet:"KMD 学院，仰光 · 54 学时",kApl:"KMD 学院，仰光 · 40 学时",cProg2:"进行中",mIEEE:"电气电子工程师学会（IEEE）· 学生会员 · 2026–至今",wEB:"为两栋教学楼设计的园区网络，支持 722 名并发用户和 1,668 台设备：三层架构、每栋楼各有核心，FortiGate HA 作为唯一的三层节点，共 14 个 VLAN 和 57 台 Wi-Fi 6 AP。我负责现场勘察、设计与架构，并把项目重建为代码：以 YAML 为单一数据源、在 GitHub Actions 中运行 143 项检查的验证器，以及由设计文件自动生成 Cisco IOS 配置的 Packet Tracer 仿真实验。",lnInNetdes:"在 NETDES 中",wSC:"由我构建并维护的六个浏览器端技术控制台的中心：网络设计、无线工程、算法、隐私与安全、操作系统和数据中心硬件。所有控制台共用一个由小型清单驱动的界面框架，提供搜索、进度、主题、英语和缅甸语以及版本回滚，使用纯 HTML、CSS 和 JavaScript 部署在 GitHub Pages 上。网络控制台包含 IEEE 802.1D 求解器，可根据输入拓扑确定根桥、端口角色和阻塞端口。",lnNetCase:"NETDES 案例"} };
+  var I18N = { th: {cAcadN:"ผ่าน 5 หลักสูตร",n3v:"เครือข่ายแคมปัส EB1-EB2 · ผู้ใช้ 722 คน · 14 VLAN",n3:"โปรเจกต์หลัก",othH:"โปรเจกต์อื่น",pill:"เปิดรับการฝึกงาน · 2027",lede:"ผมมุ่งเน้นการออกแบบ ทดสอบ และแก้ปัญหาเครือข่ายและโครงสร้างพื้นฐาน โดยมีประสบการณ์ลงมือทำกับ switching, VLAN segmentation, spanning tree, การวางแผนเครือข่ายไร้สาย การวิเคราะห์ทราฟฟิก และระบบ Linux ปัจจุบันศึกษาวิศวกรรมระบบสารสนเทศและเครือข่ายที่มหาวิทยาลัยเชียงใหม่และกำลังเตรียมสอบ CCNA",cta1:"ดูผลงาน",cta2:"ติดต่อผม",n1:"กำลังเรียน",n2:"ตอนนี้",n2v:"กำลังเตรียมสอบ Cisco CCNA",b1:"ชื่อ",b2:"หลักสูตร",b2v:"วิศวกรรมระบบสารสนเทศและเครือข่าย · มหาวิทยาลัยเชียงใหม่",b3:"ความสนใจ",b4:"เวลาท้องถิ่น",b5:"สถานะ",avail:"ว่างรับงาน",ns:"เครือข่ายและความปลอดภัย",a1:"หลักสูตรของผมสอนเป็นภาษาอังกฤษและเน้นโครงสร้างพื้นฐานเครือข่าย การออกแบบระบบ และความปลอดภัยของข้อมูล สิ่งที่ผมสนใจมากที่สุดคือการเข้าใจว่าเครือข่ายถูกออกแบบอย่างไร ทราฟฟิกเดินทางอย่างไร และจะตรวจสอบได้อย่างไรว่าระบบทำงานตามที่ตั้งใจไว้",a2:"ผมเรียนรู้ผ่านแล็บจริง โดยสร้าง topology ตรวจสอบ configuration วิเคราะห์ทราฟฟิก และแก้ปัญหาจนสามารถอธิบายสาเหตุและวิธีแก้ได้",f1:"การศึกษา",f1v:"กำลังศึกษาวิศวกรรมระบบสารสนเทศและเครือข่าย<br>มหาวิทยาลัยเชียงใหม่",f2:"คณะ",f2v:"คณะวิศวกรรมศาสตร์",f3:"จบการศึกษา",f4:"ที่อยู่",f4v:"เชียงใหม่ ประเทศไทย",seek:"กำลังหา · ฝึกงานด้านเครือข่ายและความปลอดภัย",fsub:"ด้านที่ผมพัฒนาอย่างจริงจังที่สุด",p1t:"เครือข่าย",p1d:"ลงมือทำด้านการออกแบบและแก้ปัญหาเครือข่าย รวมถึง VLAN, routing, switching, subnetting, inter-VLAN routing และการวิเคราะห์ระดับแพ็กเก็ต",p2t:"ความปลอดภัย",p2d:"มุ่งเน้นความปลอดภัยเครือข่ายเชิงปฏิบัติผ่านนโยบายไฟร์วอลล์ segmentation การควบคุมสิทธิ์ และการตรวจสอบทราฟฟิกด้วย Wireshark และ Nmap",p3t:"ระบบและโครงสร้างพื้นฐาน",p3d:"ทำงานกับ Linux และสภาพแวดล้อม virtualized lab เพื่อกำหนดค่า ทดสอบ และสนับสนุนโครงสร้างพื้นฐานอย่างเป็นระบบและทำซ้ำได้",w1t:"ชุดเครื่องมือสำรวจเครือข่าย",w2t:"บันทึกการแก้โจทย์ CTF",stBuild:"กำลังทำ",stPlan:"วางแผนไว้",ssub:"ทักษะเชิงปฏิบัติที่ใช้ในแล็บเครือข่าย การแก้ปัญหา และงานโครงสร้างพื้นฐาน",s1:"เครือข่าย",s2:"ความปลอดภัย",s3:"ระบบ",s4:"การเขียนโปรแกรม",snote:"ความชำนาญแต่ละอย่างไม่เท่ากัน บางอย่างใช้ประจำ บางอย่างยังเรียนรู้อยู่ ยินดีบอกตามตรงว่าอันไหนเป็นอันไหน",cgCisco:"Cisco Networking Academy",cgTraining:"การฝึกอบรมด้านเทคนิค",cgPath:"กำลังเรียน",cgMembership:"สมาชิกวิชาชีพ",cProg:"กำลังเรียน",cAcad:"Cisco Networking Academy",l1:"ประวัติฉบับเต็ม ทั้งการศึกษา ประสบการณ์ และช่องทางติดต่อ",l2:"แล็บเครือข่าย เครื่องมือทางเทคนิค และซอร์สโค้ดของโปรเจกต์",l3:"บันทึกการทำงาน สิ่งที่กำลังทำ สิ่งที่พัง และสิ่งที่แก้ได้",l1s:"ช่องทางหลัก",l2s:"รีโพที่ใช้งานอยู่",l3s:"เริ่มเร็ว ๆ นี้",ct:"คุยกันได้ครับ",cd:"เปิดรับการฝึกงานและตำแหน่งระดับเริ่มต้นด้านวิศวกรรมเครือข่ายและความปลอดภัย อยู่ที่เชียงใหม่ และทำงานทางไกลได้",copy:"คัดลอกอีเมล",wCulprit:"โปรเจกต์วิศวกรรมซอฟต์แวร์แบบทีมสำหรับลูกค้าจริงที่มหาวิทยาลัยเชียงใหม่ ผมรับผิดชอบด้านเอกสาร ดูแล SRS การเชื่อมโยงความต้องการ งานในสปรินต์ บันทึกการประชุม บันทึกการตัดสินใจ และเอกสารการทดสอบให้สอดคล้องกับระบบที่ใช้งานจริง",wPaw:"แพลตฟอร์มโซเชียลสำหรับสัตว์เลี้ยงที่พัฒนาโดยทีมสามคน ผมรับผิดชอบงานแบ็กเอนด์และชั้นข้อมูล รวมถึง Firebase Cloud Functions กฎความปลอดภัยของ Firestore การรองรับการยืนยันตัวตน ระบบแจ้งเตือนและตัวนับ และ service API สำหรับฝั่งหน้าเว็บ",lnCase:"กรณีศึกษาของผม",lnTeamRepo:"รีโพทีม",lnLiveProd:"เว็บไซต์จริง",lnBackend:"ซอร์สแบ็กเอนด์",lnFullRepo:"โปรเจกต์เต็ม",w1d:"คอนโซลด้านการออกแบบและแก้ปัญหาเครือข่าย ครอบคลุม VLAN, 802.1Q trunks, EtherChannel, inter-VLAN routing และ spanning tree พร้อมตัวแก้ IEEE 802.1D ที่คำนวณ root bridge, port roles และ blocked ports จาก topology ที่ป้อนเข้าไป",w2d:"คอนโซลเครือข่ายไร้สายที่ครอบคลุม RF planning, coverage margin และ cell sizing, link budgets, capacity, channel reuse, Wi-Fi security, segmentation และ monitoring เพื่อเชื่อมการคำนวณด้าน wireless design เข้ากับการตัดสินใจด้านเครือข่ายจริง",w3d:"เกมยิงเอาชีวิตรอดแบบเลื่อนด้านข้าง 2 มิติที่สร้างด้วย Java และ libGDX ร่วมกับทีม GroupSix สำหรับโปรเจกต์ปลายภาควิชาการเขียนโปรแกรมเชิงวัตถุ ผมได้พัฒนาประสบการณ์ด้านการออกแบบเชิงวัตถุ การทำงานร่วมกัน และการพัฒนาในโค้ดเบสที่ใช้สถาปัตยกรรมร่วมกัน",wsub:"ผลงานที่คัดเลือก โดยให้ความสำคัญกับเครือข่ายและโครงสร้างพื้นฐานเป็นหลัก",stLive:"ใช้งานได้",stLive2:"ใช้งานได้",stTeam:"โปรเจกต์กลุ่ม",lnLive:"เปิดคอนโซล",lnAll:"ดูทั้งหมด",lnSrc:"ซอร์สโค้ด",lnSrc2:"ซอร์สโค้ด",lnSrc3:"ซอร์สโค้ด",xTo:"ถึง",xTo2:"ถึง",xTo3:"ถึง",xTo4:"ถึง",xTo5:"ถึง",xNow:"ปัจจุบัน",xNow2:"ปัจจุบัน",xPart:"งานพาร์ทไทม์",xPart2:"งานพาร์ทไทม์",xFull:"งานประจำ",xFree:"ฟรีแลนซ์",xFound:"ผู้ก่อตั้ง",x1d:"ทดสอบซอฟต์แวร์ บันทึกปัญหาด้านฟังก์ชันและ UX ส่งผลการทดสอบให้ทีมที่รับผิดชอบ และติดตามการแก้ไขจนเสร็จ",x2o:"ทำเอง",x2d:"แบรนด์ส่วนตัวที่เผยแพร่เนื้อหาและสื่อการเรียนรู้ด้านเทคโนโลยี พร้อมกับ ZannBot บอทที่สร้างขึ้นมาเพื่อสนับสนุนงานนี้",kNet:"วิทยาลัย KMD ย่างกุ้ง · 54 ชั่วโมง",kApl:"วิทยาลัย KMD ย่างกุ้ง · 40 ชั่วโมง",cProg2:"กำลังเรียน",mIEEE:"สถาบันวิศวกรไฟฟ้าและอิเล็กทรอนิกส์ (IEEE) · สมาชิกนักศึกษา · 2026–ปัจจุบัน",wEB:"เครือข่ายแคมปัสสำหรับอาคารเรียน 2 หลัง รองรับผู้ใช้พร้อมกัน 722 คนและอุปกรณ์ 1,668 เครื่อง ออกแบบแบบ 3 ชั้นโดยมี core ในแต่ละอาคาร ใช้ FortiGate HA เป็นจุด Layer 3 เพียงจุดเดียว มี 14 VLAN และ Wi-Fi 6 AP 57 ตัว ผมรับผิดชอบการสำรวจพื้นที่ การออกแบบ และสถาปัตยกรรม จากนั้นสร้างโปรเจกต์ใหม่ในรูปแบบโค้ด ได้แก่ ไฟล์ YAML เป็นแหล่งข้อมูลหลัก ตัวตรวจสอบ 143 รายการบน GitHub Actions และแล็บจำลองใน Packet Tracer ที่สร้าง config ของ Cisco IOS จากไฟล์ออกแบบโดยอัตโนมัติ",lnInNetdes:"ใน NETDES",wSC:"ศูนย์รวมคอนโซลด้านเทคนิค 6 ตัวที่ทำงานบนเบราว์เซอร์ ซึ่งผมสร้างและดูแลเอง ได้แก่ การออกแบบเครือข่าย วิศวกรรมเครือข่ายไร้สาย อัลกอริทึม ความเป็นส่วนตัวและความปลอดภัย ระบบปฏิบัติการ และฮาร์ดแวร์ศูนย์ข้อมูล ทุกคอนโซลใช้ shell อินเทอร์เฟซร่วมกันที่สร้างจาก manifest ขนาดเล็ก มีระบบค้นหา ความคืบหน้า ธีม ภาษาอังกฤษและพม่า และการย้อนกลับเวอร์ชัน เขียนด้วย HTML, CSS และ JavaScript ล้วนบน GitHub Pages คอนโซลเครือข่ายมีตัวแก้ IEEE 802.1D ที่คำนวณ root bridge, port roles และ blocked ports จาก topology ที่ป้อนเข้าไป",lnNetCase:"กรณีศึกษา NETDES"}, zh: {cAcadN:"已完成 5 门课程",n3v:"EB1-EB2 园区网络 · 722 名用户 · 14 个 VLAN",n3:"主要项目",othH:"其他项目",pill:"接受实习机会 · 2027",lede:"我专注于网络与基础设施的设计、测试和故障排除，并通过交换、VLAN 分段、生成树、无线规划、流量分析和 Linux 系统进行实践。目前就读于清迈大学信息系统与网络工程专业，并正在准备 CCNA。",cta1:"查看项目",cta2:"联系我",n1:"在学",n2:"目前",n2v:"正在准备 Cisco CCNA",b1:"姓名",b2:"专业",b2v:"信息系统与网络工程 · 清迈大学",b3:"方向",b4:"当地时间",b5:"状态",avail:"可接洽",ns:"网络与安全",a1:"我的课程以英语授课，重点涵盖网络基础设施、系统设计和信息安全。我最关注的是理解网络如何设计、流量如何传输，以及如何验证系统是否按预期运行。",a2:"我通过实践实验学习：搭建拓扑、验证配置、分析流量并排查故障，直到能够解释问题的原因和解决方法。",f1:"学历",f1v:"就读信息系统与网络工程<br>清迈大学",f2:"学院",f2v:"工程学院",f3:"毕业",f4:"所在地",f4v:"泰国清迈",seek:"求职方向 · 网络与安全实习",fsub:"我最有意识持续发展的领域",p1t:"网络",p1d:"实践网络设计与故障排除，包括 VLAN、路由、交换、子网划分、VLAN 间路由和数据包级分析。",p2t:"安全",p2d:"专注于实用网络安全，包括防火墙策略、分段、访问控制，以及使用 Wireshark 和 Nmap 进行流量检查。",p3t:"系统与基础设施",p3d:"使用 Linux 和虚拟化实验环境，以可重复的方式配置、测试和支持基础设施。",w1t:"网络侦察工具",w2t:"CTF 解题记录",stBuild:"进行中",stPlan:"计划中",ssub:"用于网络实验、故障排除和基础设施工作的实用技能。",s1:"网络",s2:"安全",s3:"系统",s4:"编程",snote:"各项掌握程度并不相同，有些经常使用，有些仍在学习。我很乐意如实说明哪些是哪些。",cgCisco:"Cisco Networking Academy",cgTraining:"技术培训",cgPath:"进行中",cgMembership:"专业会员",cProg:"进行中",cAcad:"Cisco 网络学院",l1:"完整的履历：学历、经历与联系方式。",l2:"网络实验、技术工具和项目源代码。",l3:"构建日志：正在做什么、哪里出了问题、以及如何解决。",l1s:"主要联系方式",l2s:"活跃仓库",l3s:"即将开始",ct:"欢迎联系",cd:"接受网络与安全工程方向的实习及初级职位。常驻清迈，也可远程。",copy:"复制邮箱",wCulprit:"面向清迈大学真实客户的软件工程团队项目。我担任文档负责人，负责 SRS、需求追踪、Sprint 记录、会议纪要、决策记录与测试文档，并确保项目记录与实际部署系统保持一致。",wPaw:"三人团队开发的宠物社交平台。我负责后端与数据层工作，包括 Firebase Cloud Functions、Firestore 安全规则、认证支持、通知与计数逻辑以及前端调用的服务 API。",lnCase:"我的案例",lnTeamRepo:"团队仓库",lnLiveProd:"在线产品",lnBackend:"后端源码",lnFullRepo:"完整项目",w1d:"围绕 VLAN、802.1Q Trunk、EtherChannel、VLAN 间路由和生成树构建的网络设计与故障排除控制台，并包含 IEEE 802.1D 求解器，可根据输入拓扑确定根桥、端口角色和阻塞端口。",w2d:"无线网络控制台，涵盖 RF 规划、覆盖裕量与小区规模、链路预算、容量、信道复用、Wi-Fi 安全、分段和监控，将无线设计计算与实际网络决策连接起来。",w3d:"使用 Java 与 libGDX 构建的 2D 横版生存射击游戏，与 GroupSix 团队共同完成，作为面向对象程序设计课程的期末项目。这个项目让我积累了面向对象设计、团队协作以及在共享架构代码库中开发的经验。",wsub:"精选项目，以网络和基础设施工作为主。",stLive:"已上线",stLive2:"已上线",stTeam:"团队项目",lnLive:"打开控制台",lnAll:"查看全部",lnSrc:"源代码",lnSrc2:"源代码",lnSrc3:"源代码",xTo:"至",xTo2:"至",xTo3:"至",xTo4:"至",xTo5:"至",xNow:"至今",xNow2:"至今",xPart:"兼职",xPart2:"兼职",xFull:"全职",xFree:"自由职业",xFound:"创办者",x1d:"测试软件，记录功能和 UX 问题，将结果提交给负责团队，并跟进修复直至问题解决。",x2o:"独立运营",x2d:"发布技术内容与教育材料的个人品牌，以及为此构建的机器人 ZannBot。",kNet:"KMD 学院，仰光 · 54 学时",kApl:"KMD 学院，仰光 · 40 学时",cProg2:"进行中",mIEEE:"电气电子工程师学会（IEEE）· 学生会员 · 2026–至今",wEB:"为两栋教学楼设计的园区网络，支持 722 名并发用户和 1,668 台设备：三层架构、每栋楼各有核心，FortiGate HA 作为唯一的三层节点，共 14 个 VLAN 和 57 台 Wi-Fi 6 AP。我负责现场勘察、设计与架构，并把项目重建为代码：以 YAML 为单一数据源、在 GitHub Actions 中运行 143 项检查的验证器，以及由设计文件自动生成 Cisco IOS 配置的 Packet Tracer 仿真实验。",lnInNetdes:"在 NETDES 中",wSC:"由我构建并维护的六个浏览器端技术控制台的中心：网络设计、无线工程、算法、隐私与安全、操作系统和数据中心硬件。所有控制台共用一个由小型清单驱动的界面框架，提供搜索、进度、主题、英语和缅甸语以及版本回滚，使用纯 HTML、CSS 和 JavaScript 部署在 GitHub Pages 上。网络控制台包含 IEEE 802.1D 求解器，可根据输入拓扑确定根桥、端口角色和阻塞端口。",lnNetCase:"NETDES 案例"} };
   var ROLES_BY = {
     en: ['network engineering','infrastructure · security','ISNE @ Chiang Mai University'],
     th: ['วิศวกรรมเครือข่าย','โครงสร้างพื้นฐาน · ความปลอดภัย','ISNE มหาวิทยาลัยเชียงใหม่'],
