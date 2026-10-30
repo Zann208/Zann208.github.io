@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PavoVival</title>
+<meta name="description" content="PavoVival, a 2D side-scrolling survival shooter by GroupSix. Browser port of the original Java and libGDX game.">
+<link rel="icon" href="assets/favicon.png">
+<style>
+  @font-face { font-family: Pixeloid; src: url(assets/fonts/Pixeloid.ttf); font-display: swap; }
+  :root { --bg: #0b0d12; --panel: rgba(12, 16, 24, .82); --line: rgba(255,255,255,.12); --text: #eef2f7; --muted: #a7b0bd; --accent: #ffa500; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  body { display: flex; flex-direction: column; min-height: 100dvh; }
+  header, footer { display: flex; align-items: center; gap: 1rem; padding: .7rem 16px; max-width: 1200px; width: 100%; margin: 0 auto; }
+  header h1 { margin: 0; font: 400 1.25rem Pixeloid, monospace; letter-spacing: .04em; color: var(--accent); }
+  header .sub { color: var(--muted); font-size: .85rem; }
+  header .sp { flex: 1; }
+  .btn { font: 600 .8rem system-ui, sans-serif; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: .45rem .75rem; cursor: pointer; text-decoration: none; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn { white-space: nowrap; }
+  @media (max-width: 560px) { header .sub { display: none; } header { gap: .5rem; } }
+  main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 16px; min-height: 0; }
+  .stage { position: relative; width: 100%; max-width: 1200px; height: min(calc(100dvh - 150px), calc((100vw - 32px) * 9 / 16)); display: flex; align-items: center; justify-content: center; }
+  canvas { display: block; background: #000; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.5); outline: none; image-rendering: auto; }
+  #overlay { position: absolute; inset: 0; display: grid; place-items: center; }
+  #overlay[hidden] { display: none; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.6rem; max-width: 460px; width: calc(100% - 32px); text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .card h2 { margin: 0 0 .25rem; font: 400 2.1rem Pixeloid, monospace; color: var(--accent); letter-spacing: .04em; }
+  .card p { margin: .2rem 0 1rem; color: var(--muted); }
+  .keys { display: grid; grid-template-columns: auto 1fr; gap: .3rem .9rem; text-align: left; margin: 0 auto 1.1rem; width: max-content; font-size: .9rem; }
+  kbd { font: 600 .75rem ui-monospace, monospace; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: .1rem .4rem; background: rgba(255,255,255,.05); }
+  .loadbar { height: 4px; background: rgba(255,255,255,.1); border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+  #bar { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+  #start { font: 400 1.1rem Pixeloid, monospace; letter-spacing: .05em; color: #111; background: var(--accent); border: 0; border-radius: 10px; padding: .7rem 1.6rem; cursor: pointer; opacity: .4; pointer-events: none; }
+  body.ready #start { opacity: 1; pointer-events: auto; }
+  body.ready .loadbar { visibility: hidden; }
+  #start:focus-visible, .btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .touch { display: none; }
+  @media (pointer: coarse) {
+    .touch { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px 14px; max-width: 900px; width: 100%; margin: 0 auto; user-select: none; -webkit-user-select: none; touch-action: none; }
+    .touch div { display: flex; gap: 10px; }
+    .touch button { width: 64px; height: 64px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,.07); color: var(--text); font: 600 .8rem system-ui, sans-serif; touch-action: none; }
+    .touch button.on { background: var(--accent); color: #111; }
+    .desk { display: none; }
+    .stage { height: min(calc(100dvh - 230px), calc((100vw - 32px) * 9 / 16)); }
+  }
+  footer { color: var(--muted); font-size: .8rem; flex-wrap: wrap; gap: .4rem 1rem; }
+  footer a { color: var(--text); }
+</style>
+</head>
+<body>
+<header>
+  <h1>PavoVival</h1>
+  <span class="sub">by GroupSix &middot; browser port</span>
+  <span class="sp"></span>
+  <button class="btn" id="mute" type="button" aria-pressed="false">Sound on</button>
+  <a class="btn" href="https://github.com/Zann208/pavovival" target="_blank" rel="noopener">Source</a>
+</header>
+<main>
+  <div class="stage">
+    <canvas id="game" width="960" height="540" tabindex="0" aria-label="PavoVival game"></canvas>
+    <div id="overlay">
+      <div class="card">
+        <h2>PavoVival</h2>
+        <p>Survive three waves, then beat the boss.</p>
+        <div class="keys desk">
+          <span><kbd>A</kbd> <kbd>D</kbd></span><span>Move</span>
+          <span><kbd>W</kbd></span><span>Jump</span>
+          <span><kbd>F</kbd></span><span>Shoot</span>
+          <span><kbd>P</kbd></span><span>Pause</span>
+        </div>
+        <div class="loadbar"><div id="bar"></div></div>
+        <button id="start" type="button">Start</button>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="touch" aria-label="Touch controls">
+  <div><button data-key="a" aria-label="Move left">Left</button><button data-key="d" aria-label="Move right">Right</button></div>
+  <div><button data-key="p" aria-label="Pause">Pause</button><button data-key="w" aria-label="Jump">Jump</button><button data-key="f" aria-label="Shoot">Fire</button></div>
+</div>
+<footer>
+  <span>Original Java and libGDX game by GroupSix (Lumi, Saw, Shiro). Ported to the browser with the original art, music and rules.</span>
+</footer>
+<script src="game.js"></script>
+</body>
+</html>
