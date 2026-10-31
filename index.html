@@ -2,12 +2,13 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>Thu Htoo Zan — Network Engineering &amp; Infrastructure</title>
 <meta name="description" content="Thu Htoo Zan — Information Systems &amp; Network Engineering student at Chiang Mai University focused on network design, infrastructure, troubleshooting and security. Open to internships.">
 <meta name="author" content="Thu Htoo Zan">
 <meta name="theme-color" content="#080808">
+<meta name="color-scheme" content="dark light">
 
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Thu Htoo Zan — Network Engineering &amp; Infrastructure">
@@ -367,6 +368,13 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 @keyframes pf-drift-c{to{transform:translate3d(-10vmax,-10vmax,0) scale(1.15)}}
 @media(prefers-reduced-motion:reduce){.pf-field,.pf-field i{animation:none}}
 @media print{.pf-field{display:none}}
+/* NAV_V2: clear over the hero, frosted glass once scrolled; reaches under the status bar. */
+html{background:var(--bg)}
+nav{padding-top:env(safe-area-inset-top,0px);background:transparent;border-bottom:1px solid transparent;-webkit-backdrop-filter:none;backdrop-filter:none;transition:background .25s,border-color .25s,box-shadow .25s}
+nav.scrolled{background:color-mix(in srgb,var(--bg) 58%,transparent);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border-bottom-color:color-mix(in srgb,var(--line) 80%,transparent);box-shadow:0 10px 30px rgba(0,0,0,.18)}
+[data-theme="light"] nav.scrolled{box-shadow:0 8px 24px rgba(60,30,30,.07)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){nav.scrolled{background:var(--bg)}}
+@media print{nav{position:static}}
 /* GLASS_V1: credential and connect entries as low-opacity frosted glass over the field. */
 :root{--glass:rgba(255,255,255,.035);--glass-hi:rgba(255,255,255,.06);--glass-line:rgba(255,255,255,.08);--glass-edge:rgba(255,255,255,.07);--glass-shadow:0 10px 30px rgba(0,0,0,.22)}
 [data-theme="light"]{--glass:rgba(255,255,255,.38);--glass-hi:rgba(255,255,255,.55);--glass-line:rgba(255,255,255,.75);--glass-edge:rgba(255,255,255,.9);--glass-shadow:0 10px 30px rgba(60,30,30,.08)}
@@ -1206,6 +1214,16 @@ section{padding:clamp(2.75rem,5vw,4rem) 0}
     frame=requestAnimationFrame(function(){frame=null;spot.style.transform='translate3d('+last.clientX+'px,'+last.clientY+'px,0)';spot.classList.add('is-on')});
   },{passive:true});
   document.documentElement.addEventListener('pointerleave',function(){spot.classList.remove('is-on')});
+})();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('nav'), meta=document.querySelector('meta[name="theme-color"]'), root=document.documentElement;
+  function onScroll(){ if(nav) nav.classList.toggle('scrolled', window.scrollY>8); }
+  function syncMeta(){ if(meta) meta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim()||'#080808'); }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  try{ new MutationObserver(syncMeta).observe(root,{attributes:true,attributeFilter:['data-theme']}); }catch(e){}
+  syncMeta();
 })();
 </script>
 </body>
