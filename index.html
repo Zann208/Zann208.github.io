@@ -371,6 +371,13 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 @keyframes pf-drift-c{to{transform:translate3d(-10vmax,-10vmax,0) scale(1.15)}}
 @media(prefers-reduced-motion:reduce){.pf-field,.pf-field i{animation:none}}
 @media print{.pf-field{display:none}}
+/* FIELD_OG: dark theme uses the share-image palette: strong maroon top-left, warm grey bottom-right, grain, light bottom fade. */
+:root:not([data-theme="light"]){--field-a:.62;--field-b:.75;--field-c:.6}
+:root:not([data-theme="light"]) .pf-field-a{width:82vmax;height:82vmax;top:-36vmax;left:-24vmax}
+:root:not([data-theme="light"]) .pf-field-b{width:75vmax;height:75vmax;top:auto;bottom:-40vmax;right:-28vmax}
+:root:not([data-theme="light"]) .pf-field-c{width:58vmax;height:58vmax;bottom:auto;top:10vmax;left:36%}
+:root:not([data-theme="light"]) .pf-field::before{opacity:.36}
+:root:not([data-theme="light"]) .pf-field::after{background:linear-gradient(180deg,transparent 45%,rgba(8,8,8,.55) 100%)}
 /* SCALE_V1: slightly larger at desktop sizes (about 6%). Phones keep the default. */
 @media (min-width:900px){
   html{font-size:106.25%}
