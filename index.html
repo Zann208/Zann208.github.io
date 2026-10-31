@@ -371,13 +371,25 @@ footer{border-top:1px solid var(--line);padding:2rem 0}.foot{display:flex;justif
 @keyframes pf-drift-c{to{transform:translate3d(-10vmax,-10vmax,0) scale(1.15)}}
 @media(prefers-reduced-motion:reduce){.pf-field,.pf-field i{animation:none}}
 @media print{.pf-field{display:none}}
-/* FIELD_OG: dark theme uses the share-image palette: strong maroon top-left, warm grey bottom-right, grain, light bottom fade. */
+/* FIELD_OG: dark theme reproduces the share image. Glow positions are the thumbnail's,
+   mapped to the viewport (x and size in vw, y in vh), with only a slight drift. */
 :root:not([data-theme="light"]){--field-a:.62;--field-b:.75;--field-c:.6}
-:root:not([data-theme="light"]) .pf-field-a{width:82vmax;height:82vmax;top:-36vmax;left:-24vmax}
-:root:not([data-theme="light"]) .pf-field-b{width:75vmax;height:75vmax;top:auto;bottom:-40vmax;right:-28vmax}
-:root:not([data-theme="light"]) .pf-field-c{width:58vmax;height:58vmax;bottom:auto;top:10vmax;left:36%}
+:root:not([data-theme="light"]) .pf-field-a{width:81.7vw;height:81.7vw;left:-25vw;top:calc(11.1vh - 40.85vw);right:auto;bottom:auto;animation:pf-og-a 40s ease-in-out infinite alternate}
+:root:not([data-theme="light"]) .pf-field-b{width:75vw;height:75vw;left:52.5vw;top:calc(103vh - 37.5vw);right:auto;bottom:auto;animation:pf-og-b 46s ease-in-out infinite alternate}
+:root:not([data-theme="light"]) .pf-field-c{width:58.4vw;height:58.4vw;left:35.8vw;top:calc(74.6vh - 29.2vw);right:auto;bottom:auto;animation:pf-og-c 52s ease-in-out infinite alternate}
+:root:not([data-theme="light"]) .pf-field{background:#080808}
 :root:not([data-theme="light"]) .pf-field::before{opacity:.36}
 :root:not([data-theme="light"]) .pf-field::after{background:linear-gradient(180deg,transparent 45%,rgba(8,8,8,.55) 100%)}
+:root:not([data-theme="light"]) .pf-spot.is-on{opacity:.35}
+@keyframes pf-og-a{to{transform:translate3d(2.5vw,1.5vh,0) scale(1.04)}}
+@keyframes pf-og-b{to{transform:translate3d(-2vw,-1.5vh,0) scale(.97)}}
+@keyframes pf-og-c{to{transform:translate3d(-1.5vw,1vh,0) scale(1.03)}}
+/* portrait phones: same corners, sized to the long side so the glow is still visible */
+@media (max-aspect-ratio:1/1){
+  :root:not([data-theme="light"]) .pf-field-a{width:110vmax;height:110vmax;left:-62vmax;top:-66vmax}
+  :root:not([data-theme="light"]) .pf-field-b{width:95vmax;height:95vmax;left:auto;right:-55vmax;top:auto;bottom:-55vmax}
+  :root:not([data-theme="light"]) .pf-field-c{width:70vmax;height:70vmax;left:-5vmax;top:45vmax}
+}
 /* SCALE_V1: slightly larger at desktop sizes (about 6%). Phones keep the default. */
 @media (min-width:900px){
   html{font-size:106.25%}
